@@ -125,7 +125,7 @@ App.prototype.render = function () {
         overflow: 'hidden',
         position: 'relative',
         alignItems: 'center',
-        background: (props.isUnlocked || props.currentView.name === 'restoreVault' || props.currentView.name === 'config') ? 'white' : 'linear-gradient(rgb(84, 36, 147), rgb(104, 45, 182))',
+        background: (props.isUnlocked || props.currentView.name === 'restoreVault' || props.currentView.name === 'config') ? 'white' : '#f3d4d4',
       },
     }, [
       h(AppBar, {

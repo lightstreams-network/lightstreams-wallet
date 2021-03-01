@@ -81,7 +81,7 @@ TokenList.prototype.render = function () {
       'We had trouble loading your token balances. You can view them ',
       h('span.hotFix', {
         style: {
-          color: '#60db97',
+          color: '#2673e6',
           cursor: 'pointer',
         },
         onClick: () => {

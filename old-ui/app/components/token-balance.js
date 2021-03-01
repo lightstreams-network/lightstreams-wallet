@@ -38,7 +38,7 @@ class TokenBalance extends Component {
       textAlign: 'right',
     }
     const dimStyle = props.dimStyle ? props.dimStyle : {
-      color: ' #60db97',
+      color: ' #2673e6',
       fontSize: props.fontSize || '14px',
       marginLeft: '5px',
     }

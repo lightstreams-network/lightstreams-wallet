@@ -51,7 +51,7 @@ Notice.prototype.render = function () {
         }
 
         .markdown a {
-          color: #60db97;
+          color: #2673e6;
         }
 
         .markdown::-webkit-scrollbar {
