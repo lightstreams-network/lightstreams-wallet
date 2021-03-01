@@ -34,23 +34,20 @@ UnlockScreen.prototype.render = function () {
     }, [
       h('.unlock-screen.flex-column.flex-center.flex-grow', [
 
-        h('.logo'),
-
-        h('h1', {
+        h('.logo', {
           style: {
-            paddingTop: '50px',
-            fontSize: '30px',
-            color: '#ffffff',
+            marginTop: '50px',
+            marginBottom: '150px',
           },
-        }, 'Nifty Wallet'),
+        }),
 
         h('div', [
+
           h('input.large-input', {
             type: 'password',
             id: 'password-box',
             placeholder: 'Enter password',
             style: {
-
             },
             onKeyPress: this.onKeyPress.bind(this),
           }),
@@ -76,7 +73,7 @@ UnlockScreen.prototype.render = function () {
           onClick: () => this.props.dispatch(actions.forgotPassword()),
           style: {
             fontSize: '14px',
-            color: '#60db97',
+            color: '#2673e6',
           },
         }, 'Restore from seed phrase'),
       ]),
