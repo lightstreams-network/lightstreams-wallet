@@ -230,7 +230,7 @@ class PendingTx extends Component {
                 }, [
                   h('div.font-pre-medium', {
                     style: {
-                      fontFamily: 'Nunito SemiBold',
+                      fontFamily: 'Montserrat Light',
                       color: '#ffffff',
                       whiteSpace: 'nowrap',
                     },
@@ -241,7 +241,7 @@ class PendingTx extends Component {
                   }, [
                     h('span.font-small', {
                       style: {
-                        fontFamily: 'Nunito Regular',
+                        fontFamily: 'Montserrat UltraLight',
                         color: 'rgba(255, 255, 255, 0.7)',
                       },
                     }, addressSummary(network, address, 6, 4, false)),
@@ -249,7 +249,7 @@ class PendingTx extends Component {
 
                   h('span.font-small', {
                     style: {
-                      fontFamily: 'Nunito Regular',
+                      fontFamily: 'Montserrat UltraLight',
                     },
                   }, [
                     isToken ? h(TokenBalance, {
@@ -283,12 +283,12 @@ class PendingTx extends Component {
                 background: #ffffff;
                 display: flex;
                 justify-content: space-between;
-                font-family: Nunito Regular;
+                font-family: Montserrat UltraLight;
                 font-size: 14px;
                 padding: 5px 30px;
               }
               .table-box .row .value {
-                font-family: Nunito Regular;
+                font-family: Montserrat UltraLight;
               }
             `),
 
@@ -441,7 +441,7 @@ class PendingTx extends Component {
 
               h('.cell.row', {
                 style: {
-                  fontFamily: 'Nunito Regular',
+                  fontFamily: 'Montserrat UltraLight',
                 },
               }, [
                 h('.cell.label', 'Max Total'),
@@ -552,7 +552,7 @@ class PendingTx extends Component {
           }, [
             h('span.font-pre-medium', {
               style: {
-                fontFamily: 'Nunito SemiBold',
+                fontFamily: 'Montserrat Light',
                 color: '#ffffff',
                 display: 'inline-block',
                 whiteSpace: 'nowrap',
@@ -564,7 +564,7 @@ class PendingTx extends Component {
             }, [
               h('span.font-small', {
                 style: {
-                  fontFamily: 'Nunito Regular',
+                  fontFamily: 'Montserrat UltraLight',
                   color: 'rgba(255, 255, 255, 0.7)',
                 },
               }, addressSummary(props.network, to, 6, 4, false)),

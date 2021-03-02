@@ -177,7 +177,7 @@ width: 100%;
   margin-bottom: 23px;
   align-self: flex-start;
   color: #5d5d5d;
-  font-family: Nunito Regular;
+  font-family: Montserrat UltraLight;
   font-size: 16px;
   line-height: 21px;
   font-weight: bold;
@@ -188,7 +188,7 @@ width: 100%;
   margin-bottom: 23px;
   align-self: flex-end;
   color: #5d5d5d;
-  font-family: Nunito Regular;
+  font-family: Montserrat UltraLight;
   font-size: 16px;
   line-height: 21px;
   font-weight: normal;
@@ -256,7 +256,7 @@ width: 100%;
   border: none;
   min-width: 46px;
   padding: 0px;
-  font-family: Nunito Regular;
+  font-family: Montserrat UltraLight;
   background: transparent;
 }
 .hw-forget-device-container {

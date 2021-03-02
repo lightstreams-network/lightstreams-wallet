@@ -77,7 +77,7 @@ ShiftListItem.prototype.renderUtilComponents = function () {
   }
 
   const dimStyle = {
-    fontFamily: 'Nunito Regular',
+    fontFamily: 'Montserrat UltraLight',
     color: '#333333',
     marginLeft: '5px',
     fontSize: '14px',

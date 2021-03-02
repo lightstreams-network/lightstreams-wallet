@@ -57,7 +57,7 @@ BnAsDecimalInput.prototype.render = function () {
             height: '32px',
             borderRadius: '3px',
             border: '1px solid #e2e2e2',
-            fontFamily: 'Nunito Regular',
+            fontFamily: 'Montserrat UltraLight',
             fontSize: '14px',
           }, style),
           value: newValue,
@@ -86,7 +86,7 @@ BnAsDecimalInput.prototype.render = function () {
         h('div', {
           style: {
             color: ' #333333',
-            fontFamily: 'Nunito Regular',
+            fontFamily: 'Montserrat UltraLight',
             fontSize: '14px',
             marginLeft: '5px',
             width: '29px',

@@ -14,7 +14,7 @@ application specific styles
 }
 
 html, body {
-  font-family: 'Nunito Regular';
+  font-family: 'Montserrat UltraLight';
   color: #333333;
   font-weight: 300;
   line-height: 1.4em;
@@ -190,7 +190,7 @@ button.btn-thin {
 }
 
 .app-header h1 {
-  font-family: 'Nunito Regular';
+  font-family: 'Montserrat UltraLight';
   text-transform: uppercase;
   color: #AEAEAE;
   background: #ffffff;
@@ -201,7 +201,7 @@ button.btn-thin {
 }
 
 h2.page-subtitle {
-  font-family: 'Nunito Regular';
+  font-family: 'Montserrat UltraLight';
   color: #333333;
   font-size: 1em;
   margin: 12px;
@@ -226,7 +226,7 @@ textarea {
 }
 
 textarea.twelve-word-phrase {
-  font-family: 'Nunito Regular';
+  font-family: 'Montserrat UltraLight';
   padding: 12px;
   width: 300px;
   height: 140px;
@@ -465,7 +465,7 @@ p.buy-option {
 .section-title {
   border-top: 1px solid #e2e2e2;
   height: 80px;
-  font-family: 'Nunito Semibold';
+  font-family: 'Montserrat Light';
 }
 
 .trash:after {
@@ -536,7 +536,7 @@ input.large-input, textarea.large-input {
   padding: 0px 10px;
   border-radius: 3px;
   border: 1px solid #e2e2e2;
-  font-family: 'Nunito Regular';
+  font-family: 'Montserrat UltraLight';
   font-size: 14px;
 }
 
@@ -687,7 +687,7 @@ input.large-input {
 }
 
 .cell.label {
-  font-family: 'Nunito Regular';
+  font-family: 'Montserrat UltraLight';
   font-size: 14px;
   white-space: nowrap;
 }
@@ -754,7 +754,7 @@ input.large-input {
 }
 
 .secondary-description {
-  font-family: 'Nunito Regular';
+  font-family: 'Montserrat UltraLight';
   font-size: 14px
 }
 
@@ -769,7 +769,7 @@ input.large-input {
 }
 
 .info {
-  font-family: 'Nunito Regular';
+  font-family: 'Montserrat UltraLight';
   padding-bottom: 10px;
   display: inline-block;
 }
@@ -813,7 +813,7 @@ input.large-input {
 
 .radio-titles-subtext {
   color: #777777;
-  font-family: 'Nunito SemiBold';
+  font-family: 'Montserrat Light';
 }
 
 .selected-exchange {
@@ -834,7 +834,7 @@ input.large-input {
   color: #333333;
   padding: 0px 0px 20px 30px;
   justify-content: left;
-  font-family: Nunito Semibold;
+  font-family: Montserrat Light;
 }
 
 .eth-warning{
@@ -903,7 +903,7 @@ input.large-input {
 }
 
 .ex-coins {
-  font-family: 'Nunito SemiBold';
+  font-family: 'Montserrat Light';
   text-align: center;
   font-size: 16px;
   width: 70px;
@@ -912,7 +912,7 @@ input.large-input {
 }
 
 .marketinfo{
-  font-family: 'Nunito SemiBold';
+  font-family: 'Montserrat Light';
   color: #777777;
   font-size: 14px;
   line-height: 17px;
@@ -954,13 +954,13 @@ input.large-input {
   text-overflow: ellipsis;
   width: 5em;
   font-size: 14px;
-  font-family: "Nunito Regular";
+  font-family: "Montserrat UltraLight";
   margin-left: 5px;
   color: #777777;
 }
 
 .qr-header {
-  font-family: "Nunito SemiBold";
+  font-family: "Montserrat Light";
   font-size: 16px;
   margin-bottom: 30px;
 }
@@ -1206,13 +1206,13 @@ input[disabled],textarea[disabled] {
 }
 
 .config-title {
-  font-family: 'Nunito Semibold';
+  font-family: 'Montserrat Light';
   color: #333333;
   margin-bottom: 10px;
 }
 
 .config-description {
-  font-family: 'Nunito Regular';
+  font-family: 'Montserrat UltraLight';
   font-size: 14px;
   color: #888888;
   line-height: 18px;

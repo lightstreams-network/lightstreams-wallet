@@ -260,7 +260,7 @@ ShapeshiftForm.prototype.renderInfo = function () {
         justifyContent: 'space-around',
         textAlign: 'center',
         fontSize: '16px',
-        fontFamily: 'Nunito SemiBold',
+        fontFamily: 'Montserrat Light',
       },
     }, `Market Info for ${marketinfo.pair.replace('_', ' to ')}:`),
     h('.marketinfo', ['Status : ', `${coinOptions[coin].status}`]),

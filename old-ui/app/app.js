@@ -316,7 +316,7 @@ App.prototype.renderPrimary = function () {
           }),
           h('h2.page-subtitle', {
             style: {
-              fontFamily: 'Nunito SemiBold',
+              fontFamily: 'Montserrat Light',
               marginTop: '10px',
               marginBottom: '0px',
               textAlign: 'center',

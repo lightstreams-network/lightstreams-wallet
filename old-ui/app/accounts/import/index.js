@@ -56,7 +56,7 @@ class AccountImportSubview extends Component {
               }}
             />
             <h2 className="page-subtitle" style={{
-              fontFamily: 'Nunito SemiBold',
+              fontFamily: 'Montserrat Light',
             }}
             >Import Accounts</h2>
           </div>

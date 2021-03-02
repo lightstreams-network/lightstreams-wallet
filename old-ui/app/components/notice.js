@@ -22,7 +22,7 @@ Notice.prototype.render = function () {
     h('.flex-column.flex-center.flex-grow', {
       style: {
         width: '100%',
-        fontFamily: 'Nunito SemiBold',
+        fontFamily: 'Montserrat Light',
       },
     }, [
       h('style', `
