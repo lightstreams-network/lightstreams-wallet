@@ -32,7 +32,7 @@ class CreateVaultCompleteScreen extends Component {
             padding: '30px 6px 6px 6px',
           },
         }, [
-          'Vault Created',
+          'Wallet Created',
         ]),
 
         h('div', {
@@ -42,7 +42,7 @@ class CreateVaultCompleteScreen extends Component {
             textAlign: 'center',
           },
         }, [
-          h('div.error', `These ${wordsCount} words are the only way to restore your Nifty Wallet accounts.\nSave them somewhere safe and secret.`),
+          h('div.error', `These ${wordsCount} words are the only way to restore your Lightstreams Wallet.\nSave them somewhere safe and secret.`),
         ]),
 
         h('textarea.twelve-word-phrase', {
@@ -61,7 +61,7 @@ class CreateVaultCompleteScreen extends Component {
         }, 'I\'ve copied it somewhere safe'),
 
         h('button', {
-          onClick: () => exportAsFile(`Nifty Wallet Seed Words`, seed),
+          onClick: () => exportAsFile(`Lightstreams Wallet Seed Words`, seed),
           style: {
             margin: '10px',
             fontSize: '0.9em',

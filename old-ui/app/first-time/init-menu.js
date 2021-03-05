@@ -47,23 +47,17 @@ InitializeMenuScreen.prototype.renderMenu = function (state) {
         animationEventEmitter: this.animationEventEmitter,
       }),*/
 
-      h('.logo'),
-
-      h('h1', {
+      h('.logo', {
         style: {
-          paddingTop: '50px',
-          fontSize: '1.3em',
-          color: '#ffffff',
-          marginBottom: 10,
+          marginBottom: '150px',
         },
-      }, 'Nifty Wallet'),
-
+      }),
 
       h('div', [
         h('h3', {
           style: {
             fontSize: '0.8em',
-            color: '#ffffff',
+            color: '#495f75',
             display: 'inline',
           },
         }, 'Encrypt your new DEN'),

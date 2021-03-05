@@ -1,11 +1,11 @@
-Dear Nifty Wallet Users,
+Dear User,
 
-Nifty Wallet is beta software. 
+This Lightstreams Wallet is beta software. 
 
-When you log in to Nifty Wallet, your current account's address is visible to every new site you visit. This can be used to look up your account balances of Ether and other tokens.
+When you log in to using this Lightstreams Wallet, your current account's address is visible to every new website you visit with this browser. Websites look up your account balances of PHT and other tokens within your Lightstreams Wallet.
 
-For your privacy, for now, please sign out of Nifty Wallet when you're done using a site.
+For your privacy, for now, please sign out of you Lightstreams Wallet when you're done using a website.
 
 ## Related Links ##
 
-**[Terms of Service](https://github.com/poanetwork/metamask-extension/wiki/Terms-of-Service)**
+**[Terms of Service](https://github.com/lightstreams-network/metamask-extension/wiki/Terms-of-Service)**
