@@ -40,7 +40,7 @@ class ExecutorCell extends Component {
 				<div
 					className="account-data-subsection flex-row flex-grow"
 					style={{
-						background: 'linear-gradient(rgb(84, 36, 147), rgb(104, 45, 182))',
+						background: '#f3d4d4',
 						padding: '20px',
 						borderRadius: '5px',
 					}}

@@ -113,7 +113,7 @@ button, input[type="submit"] {
   border-radius: 3px;
   font-size: 14px;
   /* default green */
-  background: #2673e6;
+  background: #d97c7c;
   /*box-shadow: 0px 5px 10px 0px rgba(92, 52, 162, 0.3);*/
 }
 
@@ -123,7 +123,7 @@ button, input[type="submit"] {
 }
 
 .btn-green, input[type="submit"].btn-green {
-  background: #2673e6;
+  background: #d97c7c;
 }
 
 .btn-red {
@@ -252,7 +252,7 @@ textarea.twelve-word-phrase {
 
 .check {
   margin-left: 12px;
-  color: #2673e6;
+  color: #d97c7c;
   flex: 1 0 auto;
   display: flex;
   justify-content: flex-end;
@@ -306,8 +306,8 @@ app sections
 }
 
 .toast.green {
-  background-color: #2673e6;
-  border-color: #2673e6 !important;
+  background-color: #d97c7c;
+  border-color: #d97c7c !important;
 }
 
 .toast.red {
@@ -340,7 +340,7 @@ app sections
 }
 
 .warning {
-  color: #2673e6;
+  color: #d97c7c;
 }
 
 p.buy-option {
@@ -457,7 +457,7 @@ p.buy-option {
 .selected-network {
   width: 4px;
   height: 26px;
-  background: #2673e6;
+  background: #d97c7c;
   position: absolute;
   left: 0;
 }
@@ -707,7 +707,7 @@ input.large-input {
   margin-left: 50px;
   font-size: 11px;
   text-rendering: geometricPrecision;
-  color: #2673e6;
+  color: #d97c7c;
 }
 .name-label:hover .edit-text {
   visibility: visible;
@@ -894,7 +894,7 @@ input.large-input {
 }
 
 .inactiveForm {
-  background: #60269c;
+  background: #d97c7c;
   color: #ffffff;
   border: none;
   border-radius: 8px 8px 0px 0px;

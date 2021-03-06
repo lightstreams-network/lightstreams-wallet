@@ -61,7 +61,7 @@
   width: 95px;
 }
 .hw-connect__btn.selected {
-  border: 2px solid #2673e6;
+  border: 2px solid #d97c7c;
   width: 149px;
 }
 .hw-connect__btn:first-child {
@@ -154,7 +154,7 @@
 .hw-connect__get-hw__link {
   font-size: 14px;
   text-align: center;
-  color: #2673e6;
+  color: #d97c7c;
   cursor: pointer;
 }
 .hw-connect__step-asset {
@@ -266,7 +266,7 @@ width: 100%;
   padding: 22px;
 }
 .hw-forget-device-container a {
-  color: #2673e6;
+  color: #d97c7c;
   font-size: 14px;
   cursor: pointer;
 }

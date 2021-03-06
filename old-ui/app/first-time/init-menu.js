@@ -71,7 +71,7 @@ InitializeMenuScreen.prototype.renderMenu = function (state) {
           style: {
             fontSize: '18px',
             position: 'relative',
-            color: '#2673e6',
+            color: '#d97c7c',
             top: '2px',
             marginLeft: '4px',
           },
@@ -127,7 +127,7 @@ InitializeMenuScreen.prototype.renderMenu = function (state) {
           onClick: this.showRestoreVault.bind(this),
           style: {
             fontSize: '0.8em',
-            color: '#2673e6',
+            color: '#d97c7c',
           },
         }, 'Import Existing DEN'),
       ]),

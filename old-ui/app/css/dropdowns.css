@@ -1,7 +1,7 @@
 .accs-dd-menu-item-selected {
 	width: 4px;
 	height: 26px;
-	background: #2673e6;
+	background: #d97c7c;
 	position: absolute;
 	left: -25px;
 }
@@ -17,7 +17,7 @@
 .acc-dd-menu-item-text {
 	font-size: 16px;
 	margin-bottom: 5px;
-    color: #2673e6;
+    color: #d97c7c;
 }
 .accounts-selector-additional-style {
 	background: url(images/switch_acc.svg) white center center no-repeat;

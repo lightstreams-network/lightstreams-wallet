@@ -18,7 +18,7 @@ TabBar.prototype.render = function () {
   return (
     h('.flex-row.space-around', {
       style: {
-        background: '#60269c',
+        background: '#f3d4d4',
         paddingTop: (style && style.paddingTop) || '10px',
         minHeight: '45px',
         lineHeight: '45px',

@@ -204,7 +204,7 @@ class EnsInput extends Component {
     if (ensResolution && (ensResolution !== ZERO_ADDRESS)) {
       return h('i.fa.fa-check-circle.fa-lg.cursor-pointer', {
         style: {
-          color: '#2673e6',
+          color: '#d97c7c',
           background: 'white',
         },
         onClick: (event) => {
