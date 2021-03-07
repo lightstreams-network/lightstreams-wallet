@@ -125,7 +125,7 @@ App.prototype.render = function () {
         overflow: 'hidden',
         position: 'relative',
         alignItems: 'center',
-        background: (props.isUnlocked || props.currentView.name === 'restoreVault' || props.currentView.name === 'config') ? 'white' : '#e9f0fa',
+        background: (props.isUnlocked || props.currentView.name === 'restoreVault' || props.currentView.name === 'config') ? 'white' : '#92c0ff',
       },
     }, [
       h(AppBar, {
@@ -316,7 +316,7 @@ App.prototype.renderPrimary = function () {
           }),
           h('h2.page-subtitle', {
             style: {
-              fontFamily: 'Montserrat Light',
+              fontFamily: 'Montserrat Bold',
               marginTop: '10px',
               marginBottom: '0px',
               textAlign: 'center',

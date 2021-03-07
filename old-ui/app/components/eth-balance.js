@@ -45,7 +45,7 @@ EthBalanceComponent.prototype.renderBalance = function (value) {
   const splitBalance = value.split(' ')
   const ethNumber = splitBalance[0]
   const ethSuffix = splitBalance[1]
-  const showFiat = '``c``' in props ? props.showFiat : true
+  const showFiat = 'showFiat' in props ? props.showFiat : true
 
   if (shorten) {
     balance = balanceObj.shortBalance
@@ -61,7 +61,7 @@ EthBalanceComponent.prototype.renderBalance = function (value) {
     textAlign: 'right',
   }
   const dimStyle = props.dimStyle ? props.dimStyle : {
-    color: ' #d97c7c',
+    color: ' #ffffff',
     fontSize: props.fontSize || '14px',
     marginLeft: '5px',
   }

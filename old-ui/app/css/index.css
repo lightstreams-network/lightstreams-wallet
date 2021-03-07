@@ -252,7 +252,7 @@ textarea.twelve-word-phrase {
 
 .check {
   margin-left: 12px;
-  color: #d97c7c;
+  color: #ffffff;
   flex: 1 0 auto;
   display: flex;
   justify-content: flex-end;
@@ -340,7 +340,7 @@ app sections
 }
 
 .warning {
-  color: #d97c7c;
+  color: #ffffff;
 }
 
 p.buy-option {
@@ -707,7 +707,7 @@ input.large-input {
   margin-left: 50px;
   font-size: 11px;
   text-rendering: geometricPrecision;
-  color: #d97c7c;
+  color: #ffffff;
 }
 .name-label:hover .edit-text {
   visibility: visible;

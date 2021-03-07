@@ -73,7 +73,7 @@ Notice.prototype.render = function () {
         h('h3.flex-center.terms-header', {
           key: 'notice-key',
           style: {
-            color: '#d97c7c',
+            color: '#ffffff',
             width: '100%',
             fontSize: '16px',
             textAlign: 'center',

@@ -56,14 +56,14 @@ InitializeMenuScreen.prototype.renderMenu = function (state) {
       h('div', [
         h('h3', {
           style: {
-            fontSize: '0.8em',
-            color: '#495f75',
+            fontSize: '1em',
+            color: '#ffffff',
             display: 'inline',
           },
         }, 'Encrypt your new DEN'),
 
         h(Tooltip, {
-          title: 'Your DEN is your password-encrypted storage within Nifty Wallet.',
+          title: 'Your DEN is your password-encrypted storage within Lightstreams Wallet.',
           id: 'initMenu',
         },
 
@@ -126,8 +126,8 @@ InitializeMenuScreen.prototype.renderMenu = function (state) {
         h('p.pointer', {
           onClick: this.showRestoreVault.bind(this),
           style: {
-            fontSize: '0.8em',
-            color: '#d97c7c',
+            fontSize: '1em',
+            color: '#ffffff',
           },
         }, 'Import Existing DEN'),
       ]),
