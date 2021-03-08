@@ -156,7 +156,7 @@ TokenList.prototype.renderTokenStatusBar = function () {
   } else if (tokensFromCurrentNetwork.length > 1) {
     msg = `You own ${tokensFromCurrentNetwork.length} tokens`
   } else {
-    msg = `No tokens found`
+    msg = `Coming soon.`
     noTokens = true
   }
 
@@ -171,12 +171,8 @@ TokenList.prototype.renderTokenStatusBar = function () {
       },
     }, [
       h('span', msg),
-      h('button.btn-primary.wallet-view__add-token-button', {
+      h('button.btn-primary--disabled.wallet-view__add-token-button', {
         key: 'reveal-account-bar',
-        onClick: (event) => {
-          event.preventDefault()
-          this.props.addToken()
-        },
         style: {
           display: 'flex',
           justifyContent: 'center',
