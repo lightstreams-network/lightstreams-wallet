@@ -1,6 +1,13 @@
 const ethUtil = require('ethereumjs-util')
 const ethNetProps = require('eth-net-props')
 const {
+  LIGHTSTREAMS,
+  LIGHTSTREAMS_CODE,
+  LIGHTSTREAMS_CHAINID,
+  LIGHTSTREAMS_TICK,
+  LIGHTSTREAMS_SIRIUS,
+  LIGHTSTREAMS_SIRIUS_CODE,
+  LIGHTSTREAMS_SIRIUS_CHAINID,
   ROPSTEN,
   ROPSTEN_CODE,
   ROPSTEN_CHAINID,
@@ -498,6 +505,8 @@ function isInfuraProvider (type) {
 
 function isKnownProvider (type) {
   return INFURA_PROVIDER_TYPES.includes(type) ||
+  type === LIGHTSTREAMS ||
+  type === LIGHTSTREAMS_SIRIUS ||
   type === LOCALHOST ||
   type === MAINNET ||
   type === POA_SOKOL ||
@@ -514,6 +523,16 @@ function getNetworkID ({ network }) {
   let netId
   let ticker
   switch (network) {
+    case LIGHTSTREAMS:
+      netId = LIGHTSTREAMS_CODE.toString()
+      chainId = LIGHTSTREAMS_CHAINID
+      ticker = LIGHTSTREAMS_TICK
+      break
+    case LIGHTSTREAMS_SIRIUS:
+      netId = LIGHTSTREAMS_SIRIUS_CODE.toString()
+      chainId = LIGHTSTREAMS_SIRIUS_CHAINID
+      ticker = LIGHTSTREAMS_TICK
+      break
     case MAINNET:
       netId = MAINNET_CODE.toString()
       chainId = MAINNET_CHAINID

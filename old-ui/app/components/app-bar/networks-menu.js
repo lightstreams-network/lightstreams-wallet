@@ -2,7 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Dropdown, DropdownMenuItem } from '../dropdown'
 import actions from '../../../../ui/app/actions'
-import { LOCALHOST } from '../../../../app/scripts/controllers/network/enums'
+import { LOCALHOST,
+  LIGHTSTREAMS_DISPLAY_NAME,
+  LIGHTSTREAMS_SIRIUS_DISPLAY_NAME,
+
+} from '../../../../app/scripts/controllers/network/enums'
 import { networks } from '../../../../app/scripts/controllers/network/util'
 import ethNetProps from 'eth-net-props'
 import { connect } from 'react-redux'
@@ -106,6 +110,15 @@ class NetworksMenu extends Component {
     const networkDropdownItems = _networks
     .map((networkID) => {
       const networkObj = networks[networkID]
+
+      let networkDisplayName = ethNetProps.props.getNetworkDisplayName(networkID)
+      if (networkID === '163') {
+        networkDisplayName = LIGHTSTREAMS_DISPLAY_NAME
+      }
+      if (networkID === '162') {
+        networkDisplayName = LIGHTSTREAMS_SIRIUS_DISPLAY_NAME
+      }
+
       return (
         <DropdownMenuItem
           key={networkObj.providerName}
@@ -117,7 +130,7 @@ class NetworksMenu extends Component {
           }}
         >
           {providerType === networkObj.providerName ? <div className="selected-network" /> : null}
-          {ethNetProps.props.getNetworkDisplayName(networkID)}
+          {networkDisplayName}
         </DropdownMenuItem>
       )
     })
