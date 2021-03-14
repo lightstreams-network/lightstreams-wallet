@@ -111,14 +111,6 @@ class NetworksMenu extends Component {
     .map((networkID) => {
       const networkObj = networks[networkID]
 
-      let networkDisplayName = ethNetProps.props.getNetworkDisplayName(networkID)
-      if (networkID === '163') {
-        networkDisplayName = LIGHTSTREAMS_DISPLAY_NAME
-      }
-      if (networkID === '162') {
-        networkDisplayName = LIGHTSTREAMS_SIRIUS_DISPLAY_NAME
-      }
-
       return (
         <DropdownMenuItem
           key={networkObj.providerName}
@@ -130,8 +122,8 @@ class NetworksMenu extends Component {
           }}
         >
           {providerType === networkObj.providerName ? <div className="selected-network" /> : null}
-          {networkDisplayName}
-        </DropdownMenuItem>
+          {ethNetProps.props.getNetworkDisplayName(networkID)}
+    </DropdownMenuItem>
       )
     })
 

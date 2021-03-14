@@ -2022,7 +2022,7 @@ function setProviderType (type) {
                     'poa' : type === DAI ?
                     'dai' : type === CLASSIC ?
                     'etc' : type === RSK || type === RSK_TESTNET ?
-                    'rbtc' : 'eth'
+                    'rbtc' : 'pht'
     background.setCurrentCoin(newCoin, (err, data) => {
       if (err) {
         log.error(err.stack)

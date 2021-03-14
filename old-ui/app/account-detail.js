@@ -130,7 +130,7 @@ AccountDetailScreen.prototype.render = function () {
         style: {
           padding: '30px',
           flex: '1 0 auto',
-          background: '#176de2',
+          background: 'linear-gradient(#176de2, #7aabff)',
           width: '100%',
         },
       }, [
