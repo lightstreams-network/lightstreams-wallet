@@ -82,7 +82,6 @@ module.exports = class MetamaskController extends EventEmitter {
     this.extension = opts.extension
     this.platform = opts.platform
     const initState = opts.initState || {}
-    console.log("initState::", {initState})
     this.recordFirstTimeInfo(initState)
 
     // this keeps track of how many "controllerStream" connections are open
