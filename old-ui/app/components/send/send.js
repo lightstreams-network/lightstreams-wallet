@@ -108,45 +108,6 @@ class SendTransactionScreen extends PersistentForm {
         </section>
         <section className="flex-row flex-left amount-max-container"><AmountMaxButton /></section>
 
-        <h3 className="flex-center"
-          style={optionalDataLabelStyle}
-        >
-          Transaction Data (optional)
-        </h3>
-
-        <section className="flex-column flex-center">
-          <input className="large-input"
-            name= "txData"
-            placeholder= "e.g. 0x01234"
-            style={optionalDataValueStyle}
-            dataset={{
-              persistentFormid: 'tx-data',
-            }}
-            onChange={(e) => {
-              const newTxData = e.target.value
-              this.props.updateSendHexData(newTxData)
-            }}
-          />
-        </section>
-
-        <h3 className="flex-center"
-          style={optionalDataLabelStyle}
-        >
-          Custom nonce (optional)
-        </h3>
-
-        <section className="flex-column flex-center">
-          <input className="large-input"
-            name= "txCustomNonce"
-            type= "number"
-            placeholder= "e.g. 42"
-            style={optionalDataValueStyle}
-            dataset={{
-              persistentFormid: 'tx-custom-nonce',
-            }}
-            defaultValue={this.state.pendingNonce}
-          />
-        </section>
       </div>
     )
   }
@@ -210,8 +171,17 @@ class SendTransactionScreen extends PersistentForm {
     }
 
     const value = normalizeEthStringToWei(input)
-    const txData = document.querySelector('input[name="txData"]').value
-    const txCustomNonce = document.querySelector('input[name="txCustomNonce"]').value
+
+    let txData = ''
+    if (document.querySelector('input[name="txData"]')) {
+      txData = document.querySelector('input[name="txData"]').value
+    }
+
+    let txCustomNonce = ''
+    if (document.querySelector('input[name="txCustomNonce"]')) {
+      txCustomNonce = document.querySelector('input[name="txCustomNonce"]').value
+    }
+
     const balance = this.props.balance
 
     if (value.gt(balance)) {

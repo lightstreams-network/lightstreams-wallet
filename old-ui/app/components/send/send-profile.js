@@ -35,7 +35,7 @@ class SendProfile extends Component {
 			<div
 				className="account-data-subsection flex-row flex-grow"
 				style={{
-					background: 'linear-gradient(rgb(84, 36, 147), rgb(104, 45, 182))',
+          background: 'linear-gradient(#176de2, #7aabff)',
 					padding: '30px',
 					minHeight: '178px',
 				}}
@@ -81,6 +81,10 @@ class SendProfile extends Component {
 							conversionRate,
 							currentCurrency,
 							network,
+              showFiat: false,
+              style: {
+                lineHeight: '7px',
+              },
 						}} />}
 					</div>
 				</div>

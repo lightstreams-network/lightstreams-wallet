@@ -25,10 +25,10 @@ const { tokenInfoGetter, calcTokenAmount } = require('../../../ui/app/token-util
 import BigNumber from 'bignumber.js'
 import ethNetProps from 'eth-net-props'
 import { getMetaMaskAccounts } from '../../../ui/app/selectors'
-import { MIN_GAS_LIMIT_DEC } from '../../../ui/app/components/send/send.constants'
+import { MIN_GAS_LIMIT_DEC, MIN_GAS_PRICE_GWEI } from '../../../ui/app/components/send/send.constants'
 import * as Toast from './toast'
 
-const MIN_GAS_PRICE_BN = new BN('0')
+const MIN_GAS_PRICE_BN = hexToBn(MIN_GAS_PRICE_GWEI)
 const MIN_GAS_LIMIT_BN = new BN(MIN_GAS_LIMIT_DEC)
 const emptyAddress = '0x0000000000000000000000000000000000000000'
 
@@ -125,7 +125,8 @@ class PendingTx extends Component {
 
     // Gas Price
     const gasPrice = txParams.gasPrice || MIN_GAS_PRICE_BN.toString(16)
-    const gasPriceBn = hexToBn(gasPrice)
+    const gasPriceBn = MIN_GAS_PRICE_BN
+    txMeta.txParams.gasPrice = '0x' + gasPriceBn.toString('hex')
 
     const txFeeBn = gasBn.mul(gasPriceBn)
     const valueBn = hexToBn(txParams.value)
@@ -182,7 +183,7 @@ class PendingTx extends Component {
               style: {
                 maxWidth: '100%',
                 padding: showNavigation ? '20px 20px 50px 20px' : '20px 20px 20px 20px',
-                background: 'linear-gradient(rgb(84, 36, 147), rgb(104, 45, 182))',
+                background: 'linear-gradient(#176de2, #7aabff)',
                 position: 'relative',
               },
             }, [
@@ -261,6 +262,10 @@ class PendingTx extends Component {
                       conversionRate,
                       currentCurrency,
                       network,
+                      showFiat: false,
+                      style: {
+                        lineHeight: '7px',
+                      },
                       inline: true,
                     }),
                   ]),
@@ -373,62 +378,13 @@ class PendingTx extends Component {
                   network,
                   isToken,
                   tokenSymbol: this.state.token.symbol,
-                  showFiat: !isToken,
+                  showFiat: false,
                 }),
-              ]),
-
-              // Gas Limit (customizable)
-              h('.cell.row', [
-                h('.cell.label', 'Gas Limit'),
-                h('.cell.value', {
-                }, [
-                  h(BNInput, {
-                    id: 'gas_limit',
-                    name: 'Gas Limit',
-                    value: gasBn,
-                    precision: 0,
-                    scale: 0,
-                    // The hard lower limit for gas.
-                    min: MIN_GAS_LIMIT_BN,
-                    max: safeGasLimit,
-                    suffix: 'UNITS',
-                    style: {
-                      position: 'relative',
-                      width: '91px',
-                    },
-                    onChange: this.gasLimitChanged.bind(this),
-
-                    ref: (hexInput) => { this.inputs.push(hexInput) },
-                  }),
-                ]),
-              ]),
-
-              // Gas Price (customizable)
-              h('.cell.row', [
-                h('.cell.label', 'Gas Price'),
-                h('.cell.value', {
-                }, [
-                  h(BNInput, {
-                    id: 'gas_price',
-                    name: 'Gas Price',
-                    value: gasPriceBn,
-                    precision: 9,
-                    scale: 9,
-                    suffix: 'GWEI',
-                    min: forceGasMin || MIN_GAS_PRICE_BN,
-                    style: {
-                      position: 'relative',
-                      width: '91px',
-                    },
-                    onChange: this.gasPriceChanged.bind(this),
-                    ref: (hexInput) => { this.inputs.push(hexInput) },
-                  }),
-                ]),
               ]),
 
               // Max Transaction Fee (calculated)
               h('.cell.row', [
-                h('.cell.label', 'Max Transaction Fee'),
+                h('.cell.label', 'Transaction Fee'),
                 h(EthBalance, {
                   valueStyle,
                   dimStyle,
@@ -436,6 +392,7 @@ class PendingTx extends Component {
                   currentCurrency,
                   conversionRate,
                   network,
+                  showFiat: false,
                 }),
               ]),
 
@@ -444,7 +401,7 @@ class PendingTx extends Component {
                   fontFamily: 'Montserrat UltraLight',
                 },
               }, [
-                h('.cell.label', 'Max Total'),
+                h('.cell.label', 'Total'),
                 h('.cell.value', {
                   style: {
                     display: 'flex',
@@ -461,20 +418,11 @@ class PendingTx extends Component {
                     network,
                     labelColor: 'black',
                     fontSize: '16px',
+                    showFiat: false,
                   }),
                 ]),
               ]),
 
-              // Data size row:
-              h('.cell.row', {
-                style: {
-                  background: '#ffffff',
-                  paddingBottom: '0px',
-                },
-              }, [
-                h('.cell.label'),
-                h('.cell.value', `Data included: ${dataLength} bytes`),
-              ]),
             ]), // End of Table
 
           ]),
@@ -493,15 +441,6 @@ class PendingTx extends Component {
               margin: '14px 30px',
             },
           }, [
-            h('button.btn-violet', {
-              onClick: (event) => {
-                this.resetGasFields()
-                event.preventDefault()
-              },
-              style: {
-                marginRight: 0,
-              },
-            }, 'Reset'),
 
             // Accept Button or Buy Button
             insufficientBalance ? h('button.btn-green', { onClick: props.buyEth }, `Buy ${this.state.coinName}`) :
@@ -514,7 +453,7 @@ class PendingTx extends Component {
 
             h('button.cancel.btn-red', {
               onClick: props.cancelTransaction,
-            }, 'Reject'),
+            }, 'Cancel'),
           ]),
           showNavigation ? h('.flex-row.flex-space-around.conf-buttons', {
             style: {
@@ -664,6 +603,13 @@ class PendingTx extends Component {
     event.preventDefault()
     const txMeta = this.gatherTxMeta()
     const valid = this.checkValidity()
+
+    txMeta.txParams.gasPrice = '0x' + MIN_GAS_PRICE_BN.toString('hex')
+    this.setState({
+      txData: clone(txMeta),
+      valid: true,
+    })
+
     this.setState({ valid, submitting: true })
     if (valid && this.verifyGasParams()) {
       this.props.sendTransaction(txMeta, event)
