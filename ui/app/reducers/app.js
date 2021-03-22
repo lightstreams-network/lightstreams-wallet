@@ -705,13 +705,14 @@ function reduceApp (state, action) {
         },
         identity: state.metamask.identities[action.value.address],
         buyView: {
-          subview: 'Coinbase',
+          subview: 'Coindeal',
           amount: '15.00',
           buyAddress: action.value.address,
           isContractExecutionByUser: action.value.isContractExecutionByUser,
           formView: {
-            coinbase: true,
+            coinbase: false,
             shapeshift: false,
+            coindeal: true,
           },
         },
       })
@@ -733,6 +734,20 @@ function reduceApp (state, action) {
           formView: {
             coinbase: true,
             shapeshift: false,
+          },
+          buyAddress: appState.buyView.buyAddress,
+          amount: appState.buyView.amount,
+        },
+      })
+
+    case actions.COINDEAL_SUBVIEW:
+      return extend(appState, {
+        buyView: {
+          subview: 'Coindeal',
+          formView: {
+            coinbase: false,
+            shapeshift: false,
+            coindeal: true,
           },
           buyAddress: appState.buyView.buyAddress,
           amount: appState.buyView.amount,

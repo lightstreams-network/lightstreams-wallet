@@ -2,13 +2,13 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import actions from '../../../ui/app/actions'
 import CoinbaseForm from './coinbase-form'
-import ShapeshiftForm from './shapeshift-form'
+import CoindealForm from './coindeal-form'
 import Loading from './loading'
 import AccountPanel from './account-panel'
 import RadioList from './custom-radio-list'
 import { getNetworkDisplayName } from '../../../app/scripts/controllers/network/util'
 import { getFaucets, getExchanges } from '../../../app/scripts/lib/buy-eth-url'
-import { MAINNET_CODE } from '../../../app/scripts/controllers/network/enums'
+import { MAINNET_CODE, MAINNET_NETWORK_ID, LIGHTSTREAMS_NETWORK_ID, LIGHTSTREAMS_SIRIUS_NETWORK_ID } from '../../../app/scripts/controllers/network/enums'
 import ethNetProps from 'eth-net-props'
 import PropTypes from 'prop-types'
 import { getMetaMaskAccounts } from '../../../ui/app/selectors'
@@ -80,7 +80,8 @@ class BuyButtonSubview extends Component {
       case 'loading':
         return
 
-      case '1':
+      case "1":
+      case LIGHTSTREAMS_NETWORK_ID:
         return this.mainnetSubview()
 
       default:
@@ -116,6 +117,9 @@ class BuyButtonSubview extends Component {
 
   _getFaucetsView (network) {
     const faucets = getFaucets(network)
+    if (network === LIGHTSTREAMS_SIRIUS_NETWORK_ID ) {
+      return <h2>Coming Soon...</h2>
+    }
     if (faucets.length === 0) {
       return <h2 className="error">Unknown network ID</h2>
     }
@@ -135,20 +139,20 @@ class BuyButtonSubview extends Component {
 
   mainnetSubview () {
     const props = this.props
+    const network = props.network
+
+    let exchanges = ['Coindeal']
+
+    if (Number(network) === MAINNET_CODE) {
+      exchanges.push('Coinbase')
+    }
 
     return (
       <div className="flex-column">
         <div className="flex-row selected-exchange">
           <RadioList
             defaultFocus={props.buyView.subview}
-            labels={[
-              'Coinbase',
-              'ShapeShift',
-            ]}
-            subtext={{
-              'Coinbase': 'Crypto/FIAT (USA only)',
-              'ShapeShift': 'Crypto',
-            }}
+            labels={exchanges}
             onClick={(event) => this.radioHandler(event)}
           />
         </div>
@@ -165,11 +169,11 @@ class BuyButtonSubview extends Component {
 
   formVersionSubview () {
     const { network } = this.props
-    if (Number(network) === MAINNET_CODE) {
+    if (Number(network) === MAINNET_CODE || network === LIGHTSTREAMS_NETWORK_ID) {
       if (this.props.buyView.formView.coinbase) {
         return <CoinbaseForm { ...this.props } />
-      } else if (this.props.buyView.formView.shapeshift) {
-        return <ShapeshiftForm { ...this.props } />
+      } else if (this.props.buyView.formView.coindeal) {
+        return <CoindealForm { ...this.props } />
       }
     }
   }
@@ -188,8 +192,8 @@ class BuyButtonSubview extends Component {
     switch (event.target.title) {
       case 'Coinbase':
         return this.props.dispatch(actions.coinBaseSubview())
-      case 'ShapeShift':
-        return this.props.dispatch(actions.shapeShiftSubview(this.props.provider.type))
+      case 'Coindeal':
+        return this.props.dispatch(actions.coinDealSubview(this.props.provider.type))
     }
   }
 }

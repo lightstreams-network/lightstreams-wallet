@@ -287,6 +287,8 @@ const actions = {
   BUY_ETH_VIEW: 'BUY_ETH_VIEW',
   COINBASE_SUBVIEW: 'COINBASE_SUBVIEW',
   coinBaseSubview: coinBaseSubview,
+  COINDEAL_SUBVIEW: 'COINDEAL_SUBVIEW',
+  coinDealSubview: coinDealSubview,
   SHAPESHIFT_SUBVIEW: 'SHAPESHIFT_SUBVIEW',
   shapeShiftSubview: shapeShiftSubview,
   PAIR_UPDATE: 'PAIR_UPDATE',
@@ -2371,6 +2373,12 @@ function buyEthView (address, isContractExecutionByUser) {
 function coinBaseSubview () {
   return {
     type: actions.COINBASE_SUBVIEW,
+  }
+}
+
+function coinDealSubview () {
+  return {
+    type: actions.COINDEAL_SUBVIEW,
   }
 }
 

@@ -136,7 +136,7 @@ App.prototype.render = function () {
       // panel content
       h('.app-primary' + (transForward ? '.from-right' : '.from-left'), {
         style: {
-          background: (props.isUnlocked || props.currentView.name === 'restoreVault' || props.currentView.name === 'config') ? confirmMsgTx ? 'linear-gradient(rgb(84, 36, 147), rgb(104, 45, 182))' : 'white' : 'transparent',
+          background: (props.isUnlocked || props.currentView.name === 'restoreVault' || props.currentView.name === 'config') ? confirmMsgTx ? 'linear-gradient(#176de2, #7aabff)' : 'white' : 'transparent',
           height: (props.isUnlocked && confirmMsgTx) ? '100%' : 'auto',
         },
       }, [
