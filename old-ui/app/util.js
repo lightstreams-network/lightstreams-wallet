@@ -97,6 +97,7 @@ module.exports = {
   ifContractAcc,
   ifHardwareAcc,
   getAllKeyRingsAccounts,
+  ifLightstreams,
   ifRSK,
   ifETC,
   ifRSKByProviderType,
@@ -463,6 +464,12 @@ function ifPOA (network) {
   if (!network) return false
   const numericNet = isNaN(network) ? network : parseInt(network)
   return numericNet === POA_SOKOL_CODE || numericNet === POA_CODE
+}
+
+function ifLightstreams (network) {
+  if (!network) return false
+  const numericNet = isNaN(network) ? network : parseInt(network)
+  return numericNet === LIGHTSTREAMS_CODE || numericNet === LIGHTSTREAMS_SIRIUS_CODE
 }
 
 function ifXDai (network) {

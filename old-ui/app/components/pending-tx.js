@@ -323,7 +323,6 @@ class PendingTx extends Component {
               isError ? h('div', {
                 style: {
                   textAlign: 'center',
-                  position: 'absolute',
                   top: '25px',
                   background: 'rgba(255, 255, 255, 0.85)',
                   width: '100%',
@@ -464,7 +463,7 @@ class PendingTx extends Component {
           }, [
             h('button.cancel.btn-red', {
               onClick: props.cancelAllTransactions,
-            }, 'Reject All'),
+            }, 'Cancel All'),
           ]) : null,
         ]),
       ])
@@ -688,7 +687,8 @@ class PendingTx extends Component {
       positionOfCurrentTx: currentPosition + 1,
       nextTxId: enumUnapprovedTxs[currentPosition + 1],
       prevTxId: enumUnapprovedTxs[currentPosition - 1],
-      showNavigation: enumUnapprovedTxs.length > 1,
+      //showNavigation: enumUnapprovedTxs.length > 1,
+      showNavigation: false // Workaound: Disable as there is a bug in the navigation.
     }
   }
 
