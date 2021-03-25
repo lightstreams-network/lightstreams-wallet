@@ -56,28 +56,12 @@ InitializeMenuScreen.prototype.renderMenu = function (state) {
       h('div', [
         h('h3', {
           style: {
-            fontSize: '1em',
-            color: '#ffffff',
+            fontSize: '18px',
+            fontWeight: '300',
+            color: '#fff',
             display: 'inline',
           },
-        }, 'Encrypt your new DEN'),
-
-        h(Tooltip, {
-          title: 'Your DEN is your password-encrypted storage within Lightstreams Wallet.',
-          id: 'initMenu',
-        },
-
-        h('i.fa.fa-question-circle.pointer', {
-          style: {
-            fontSize: '18px',
-            position: 'relative',
-            color: '#d97c7c',
-            top: '2px',
-            marginLeft: '4px',
-          },
-          'data-tip': '',
-          'data-for': 'initMenu',
-        })),
+        }, 'Create a password'),
       ]),
 
       state.warning ? h('div', {
@@ -126,10 +110,10 @@ InitializeMenuScreen.prototype.renderMenu = function (state) {
         h('p.pointer', {
           onClick: this.showRestoreVault.bind(this),
           style: {
-            fontSize: '1em',
-            color: '#ffffff',
+            fontSize: '16px',
+            color: '#333',
           },
-        }, 'Import Existing DEN'),
+        }, 'Import a wallet'),
       ]),
 
     ])

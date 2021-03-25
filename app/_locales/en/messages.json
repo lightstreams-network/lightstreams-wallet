@@ -350,7 +350,7 @@
     "message": "Email us!"
   },
   "encryptNewDen": {
-    "message": "Encrypt your new DEN"
+    "message": "Create a password"
   },
   "ensNameNotFound": {
     "message": "ENS name not found"
@@ -873,7 +873,7 @@
     "message": "Restore account?"
   },
   "restoreVault": {
-    "message": "Restore Vault"
+    "message": "Import Wallet"
   },
   "restoreAccountWithSeed": {
     "message": "Restore your Account with Seed Phrase"

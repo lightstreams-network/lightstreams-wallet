@@ -51,7 +51,7 @@ RestoreVaultScreen.prototype.render = function () {
             padding: 30,
           },
         }, [
-          h('.page-subtitle', 'Restore Vault'),
+          h('.page-subtitle', 'Import Wallet'),
         ]),
 
         // wallet seed entry
@@ -61,9 +61,9 @@ RestoreVaultScreen.prototype.render = function () {
             marginBottom: '20px',
             fontFamily: 'Montserrat Light',
           },
-        }, 'Wallet Seed'),
+        }, 'Secret Phrase'),
         h('textarea.twelve-word-phrase', {
-          placeholder: 'Enter your secret twelve word phrase here to restore your vault.',
+          placeholder: 'Enter your wallet secret phrase, the twelve word phrase that represents the private key of your wallet.',
         }),
 
         // password
