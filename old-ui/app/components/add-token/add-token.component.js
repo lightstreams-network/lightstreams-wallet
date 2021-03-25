@@ -251,7 +251,7 @@ export default class AddTokenScreen extends Component {
             marginTop: '10px',
           },
         }, [
-          h('button.btn-violet', {
+          h('button.btn-grey', {
             onClick: () => {
               goHome()
             },
@@ -301,7 +301,7 @@ export default class AddTokenScreen extends Component {
       ]),
       h('.page-container__footer', [
         h('.page-container__footer-container', [
-          h('button.btn-violet', {
+          h('button.btn-grey', {
             onClick: () => {
               clearPendingTokens()
               goHome()

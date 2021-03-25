@@ -84,7 +84,7 @@ RevealSeedConfirmation.prototype.render = function () {
           },
         }, [
           // cancel
-          h('button.btn-violet', {
+          h('button.btn-grey', {
             onClick: this.goHome.bind(this),
           }, 'Cancel'),
 

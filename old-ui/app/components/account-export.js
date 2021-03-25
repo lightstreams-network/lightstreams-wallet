@@ -80,7 +80,7 @@ ExportAccountView.prototype.render = function () {
             },
           },
             [
-              h('button.btn-violet', {
+              h('button.btn-grey', {
                 onClick: () => this.props.dispatch(actions.backToAccountDetail(this.props.address)),
               }, 'Cancel'),
               h('button', {
@@ -144,7 +144,7 @@ ExportAccountView.prototype.render = function () {
           marginTop: '30px',
         },
       }, [
-        h('button.btn-violet', {
+        h('button.btn-grey', {
           onClick: () => exportAsFile(`Nifty Wallet ${nickname} Private Key`, plainKey),
         }, 'Save as File'),
         h('button', {

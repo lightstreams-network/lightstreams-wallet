@@ -90,7 +90,7 @@ ConfirmChangePassword.prototype.render = function () {
         marginRight: '30px',
       },
     }, [
-      h('button.btn-violet',
+      h('button.btn-grey',
         {
           onClick: () => {
             this.props.dispatch(actions.showConfigPage())
