@@ -72,10 +72,11 @@ UnlockScreen.prototype.render = function () {
         h('p.pointer', {
           onClick: () => this.props.dispatch(actions.forgotPassword()),
           style: {
-            fontSize: '14px',
-            color: '#333',
+            fontSize: '16px',
+            marginTop: '15px',
+            color: '#fff',
           },
-        }, 'Restore from seed phrase'),
+        }, 'Recover wallet'),
       ]),
     ])
   )
