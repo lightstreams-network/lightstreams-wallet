@@ -43,7 +43,7 @@ class CreateVaultCompleteScreen extends Component {
           },
         }, [
           h('p',
-            `Please record the following secret phrase and keep it safe. Do not reveal it to anyone.`),
+            `Please record the following secret phrase and keep it safe.`),
         ]),
 
         h('textarea.twelve-word-phrase', {
@@ -67,14 +67,14 @@ class CreateVaultCompleteScreen extends Component {
           },
         }, [
           h('div.error',
-            `If you forget your password then this phrase is the only way to recover your wallet.`),
+            `If you forget your password then this phrase is the only way to recover your wallet. Do not reveal it to anyone as it can be used to take control of your wallet and steal your funds.`),
         ]),
 
         h('button', {
           onClick: () => this.confirmSeedWords()
             .then(account => this.showAccountDetail(account)),
           style: {
-            margin: '24px',
+            margin: '5px 20px',
             fontSize: '0.9em',
           },
         }, 'I confirm that I\'ve recorded the phrase'),

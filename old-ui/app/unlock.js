@@ -57,7 +57,7 @@ UnlockScreen.prototype.render = function () {
             style: {
               margin: '10px 0 10px 10px',
             },
-          }, 'Log In'),
+          }, 'Sign In'),
 
           h('.error', {
             style: {

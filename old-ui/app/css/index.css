@@ -465,7 +465,8 @@ p.buy-option {
 
 .section-title {
   border-top: 1px solid #e2e2e2;
-  height: 80px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   font-family: 'Montserrat Light';
 }
 

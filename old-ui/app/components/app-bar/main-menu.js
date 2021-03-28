@@ -39,7 +39,7 @@ class MainMenu extends Component {
           position: 'absolute',
           right: '2px',
           top: '38px',
-          width: '126px',
+          width: '135px',
           maxHeight: isOpen ? '186px' : '0px',
           overflow: 'hidden',
         }}
@@ -51,13 +51,13 @@ class MainMenu extends Component {
 
         <DropdownMenuItem
           closeMenu={() => this.props.changeState(isMainMenuOpen)}
-          onClick={() => { this.props.lockMetamask() }}
-        >Log Out</DropdownMenuItem>
+          onClick={() => { this.props.showInfoPage() }}
+        >Info</DropdownMenuItem>
 
         <DropdownMenuItem
-          closeMenu={() => this.props.changeState(isMainMenuOpen)}
-          onClick={() => { this.props.showInfoPage() }}
-        >Info/Help</DropdownMenuItem>
+        closeMenu={() => this.props.changeState(isMainMenuOpen)}
+        onClick={() => { this.props.lockMetamask() }}
+      >Sign Out</DropdownMenuItem>
       </Dropdown>
     )
   }

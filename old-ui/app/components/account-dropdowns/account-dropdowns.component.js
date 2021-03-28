@@ -110,17 +110,7 @@ class AccountDropdowns extends Component {
       <AccountsDropdownItemWrapper
         key="AccountsDropdownItemAdd"
         onClick={() => actions.addNewAccount()}
-        label="Create Account"
-      />,
-      <AccountsDropdownItemWrapper
-        key="AccountsDropdownItemImport"
-        onClick={() => actions.showImportPage()}
-        label="Import Account"
-      />,
-      <AccountsDropdownItemWrapper
-        key="AccountsDropdownItemConnectHD"
-        onClick={() => actions.showConnectHWWalletPage()}
-        label="Connect hardware wallet"
+        label="Add Account"
       />,
     ]
     menuItems = menuItems.concat(bottomMenuItems)

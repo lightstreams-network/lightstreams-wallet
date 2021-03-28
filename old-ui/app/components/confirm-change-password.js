@@ -78,13 +78,6 @@ ConfirmChangePassword.prototype.render = function () {
         onKeyPress: this.createOnEnter.bind(this),
       }),
     ]),
-    h('p.confirm-label', {
-        style: {
-          textAlign: 'center',
-          margin: '0px 30px 20px ',
-        },
-      },
-      `Are you sure you want to change the password for unlocking of your wallet?`),
     h('.flex-row.flex-right', {
       style: {
         marginRight: '30px',
@@ -96,14 +89,14 @@ ConfirmChangePassword.prototype.render = function () {
             this.props.dispatch(actions.showConfigPage())
           },
         },
-        'No'),
+        'Cancel'),
       h('button',
         {
           onClick: () => {
             this.ChangePassword()
           },
         },
-        'Yes'),
+        'Save'),
     ]),
   ])
 }
