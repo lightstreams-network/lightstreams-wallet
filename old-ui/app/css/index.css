@@ -249,6 +249,7 @@ textarea.twelve-word-phrase {
   text-rendering: geometricPrecision;
   padding-left: 9px;
   color: #6729a8;
+  font-size: 12px;
 }
 
 .check {
