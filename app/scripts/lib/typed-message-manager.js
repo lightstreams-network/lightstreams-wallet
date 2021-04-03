@@ -87,17 +87,17 @@ export default class TypedMessageManager extends EventEmitter {
           case 'rejected':
             return reject(
               ethErrors.provider.userRejectedRequest(
-                'Nifty Wallet Message Signature: User denied message signature.',
+                'Lightstreams Wallet Message Signature: User denied message signature.',
               ),
             )
           case 'errored':
             return reject(
-              new Error(`Nifty Wallet Message Signature: ${data.error}`),
+              new Error(`Lightstreams Wallet Message Signature: ${data.error}`),
             )
           default:
             return reject(
               new Error(
-                `Nifty Wallet Message Signature: Unknown problem: ${JSON.stringify(
+                `Lightstreams Wallet Message Signature: Unknown problem: ${JSON.stringify(
                   msgParams,
                 )}`,
               ),

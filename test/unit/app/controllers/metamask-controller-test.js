@@ -810,7 +810,7 @@
 //         await metamaskController.newUnsignedPersonalMessage(msgParams)
 //         assert.fail('should have thrown')
 //       } catch (error) {
-//         assert.equal(error.message, 'Nifty Wallet Message Signature: from field is required.')
+//         assert.equal(error.message, 'Lightstreams Wallet Message Signature: from field is required.')
 //       }
 //     })
 

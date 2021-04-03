@@ -145,7 +145,7 @@ ExportAccountView.prototype.render = function () {
         },
       }, [
         h('button.btn-grey', {
-          onClick: () => exportAsFile(`Nifty Wallet ${nickname} Private Key`, plainKey),
+          onClick: () => exportAsFile(`Lightstreams Wallet ${nickname} Private Key`, plainKey),
         }, 'Save as File'),
         h('button', {
           style: {

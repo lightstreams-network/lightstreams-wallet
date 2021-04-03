@@ -136,7 +136,7 @@ async function initialize () {
   const initState = await loadStateFromPersistence()
   const initLangCode = await getFirstPreferredLangCode()
   await setupController(initState, initLangCode)
-  log.debug('Nifty Wallet initialization complete.')
+  log.debug('Lightstreams Wallet initialization complete.')
 }
 
 //
@@ -165,7 +165,7 @@ async function loadStateFromPersistence () {
   if (versionedData && !versionedData.data) {
     // unable to recover, clear state
     versionedData = migrator.generateInitialState(firstTimeState)
-    raven.captureMessage('Nifty Wallet - Empty vault found - unable to recover')
+    raven.captureMessage('Lightstreams Wallet - Empty vault found - unable to recover')
   }
 
   // report migration errors to sentry
@@ -181,7 +181,7 @@ async function loadStateFromPersistence () {
   // migrate data
   versionedData = await migrator.migrateData(versionedData)
   if (!versionedData) {
-    throw new Error('Nifty Wallet - migrator returned undefined')
+    throw new Error('Lightstreams Wallet - migrator returned undefined')
   }
 
   // write to disk
@@ -190,7 +190,7 @@ async function loadStateFromPersistence () {
   } else {
     // throw in setTimeout so as to not block boot
     setTimeout(() => {
-      throw new Error('Nifty Wallet - Localstore not supported')
+      throw new Error('Lightstreams Wallet - Localstore not supported')
     })
   }
 
@@ -244,7 +244,7 @@ function setupController (initState, initLangCode) {
     storeTransformStream(versionifyData),
     createStreamSink(persistData),
     (error) => {
-      log.error('Nifty Wallet - Persistence pipeline failed', error)
+      log.error('Lightstreams Wallet - Persistence pipeline failed', error)
     },
   )
 
@@ -262,10 +262,10 @@ function setupController (initState, initLangCode) {
 
   async function persistData (state) {
     if (!state) {
-      throw new Error('Nifty Wallet - updated state is missing')
+      throw new Error('Lightstreams Wallet - updated state is missing')
     }
     if (!state.data) {
-      throw new Error('Nifty Wallet - updated state does not have data')
+      throw new Error('Lightstreams Wallet - updated state does not have data')
     }
     if (localStore.isSupported) {
       try {

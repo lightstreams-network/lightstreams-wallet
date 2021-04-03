@@ -42,7 +42,7 @@ async function runFirstTimeUsageTest(assert, done) {
 
   // Scroll through terms
   const title = (await findAsync(app, 'h1'))[0]
-  assert.equal(title.textContent, 'Nifty Wallet', 'title screen')
+  assert.equal(title.textContent, 'Lightstreams Wallet', 'title screen')
 
   // enter password
   const pwBox = (await findAsync(app, '#password-box'))[0]

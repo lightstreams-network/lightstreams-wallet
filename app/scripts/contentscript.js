@@ -46,7 +46,7 @@ function injectScript (content) {
     container.insertBefore(scriptTag, container.children[0])
     container.removeChild(scriptTag)
   } catch (error) {
-    console.error('Nifty Wallet injection failed.', error)
+    console.error('Lightstreams Wallet injection failed.', error)
   }
 }
 
@@ -73,10 +73,10 @@ async function setupStreams () {
   extensionMux.ignoreStream(LEGACY_PUBLIC_CONFIG) // TODO:LegacyProvider: Delete
 
   pump(pageMux, pageStream, pageMux, (err) =>
-    logStreamDisconnectWarning('Nifty Wallet Inpage Multiplex', err),
+    logStreamDisconnectWarning('Lightstreams Wallet Inpage Multiplex', err),
   )
   pump(extensionMux, extensionStream, extensionMux, (err) => {
-    logStreamDisconnectWarning('Nifty Wallet Background Multiplex', err)
+    logStreamDisconnectWarning('Lightstreams Wallet Background Multiplex', err)
     notifyInpageOfStreamFailure()
   })
 
@@ -85,7 +85,7 @@ async function setupStreams () {
     pageStream,
     extensionStream,
     pageStream,
-    (err) => logStreamDisconnectWarning('Nifty Wallet Contentscript Forwarding', err),
+    (err) => logStreamDisconnectWarning('Lightstreams Wallet Contentscript Forwarding', err),
   )
 
 
@@ -106,7 +106,7 @@ async function setupStreams () {
   legacyExtensionMux.setMaxListeners(25)
 
   pump(legacyPageMux, legacyPageStream, legacyPageMux, (err) =>
-    logStreamDisconnectWarning('Nifty Wallet Legacy Inpage Multiplex', err),
+    logStreamDisconnectWarning('Lightstreams Wallet Legacy Inpage Multiplex', err),
   )
   pump(
     legacyExtensionMux,
@@ -114,7 +114,7 @@ async function setupStreams () {
     getNotificationTransformStream(),
     legacyExtensionMux,
     (err) => {
-      logStreamDisconnectWarning('Nifty Wallet Background Legacy Multiplex', err)
+      logStreamDisconnectWarning('Lightstreams Wallet Background Legacy Multiplex', err)
       notifyInpageOfStreamFailure()
     },
   )
@@ -306,7 +306,7 @@ function blockedDomainCheck () {
  * Redirects the current page to a phishing information page
  */
 function redirectToPhishingWarning () {
-  console.log('Nifty Wallet - routing to Phishing Warning component')
+  console.log('Lightstreams Wallet - routing to Phishing Warning component')
   const extensionURL = extension.runtime.getURL('phishing.html')
   window.location.href = `${extensionURL}#${querystring.stringify({
     hostname: window.location.hostname,
