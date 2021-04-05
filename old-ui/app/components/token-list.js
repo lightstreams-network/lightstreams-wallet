@@ -156,7 +156,7 @@ TokenList.prototype.renderTokenStatusBar = function () {
   } else if (tokensFromCurrentNetwork.length > 1) {
     msg = `You own ${tokensFromCurrentNetwork.length} tokens`
   } else {
-    msg = `Coming soon.`
+    msg = `Coming soon... \nNFTs etc.`
     noTokens = true
   }
 
@@ -179,7 +179,7 @@ TokenList.prototype.renderTokenStatusBar = function () {
           alignItems: 'center',
         },
       }, [
-        'Add Token',
+        'Add',
       ]),
     ]),
     noTokens ? h('div', {
