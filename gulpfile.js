@@ -71,10 +71,6 @@ createCopyTasks('contractImages', {
   source: './node_modules/@metamask/contract-metadata/images/',
   destinations: commonPlatforms.map(platform => `./dist/${platform}/images/contract`),
 })
-createCopyTasks('contractImagesPOA', {
-  source: './node_modules/poa-contract-metadata/images/',
-  destinations: commonPlatforms.map(platform => `./dist/${platform}/images/contractPOA`),
-})
 createCopyTasks('contractImagesRSK', {
   source: './node_modules/@rsksmart/rsk-contract-metadata/images/',
   destinations: commonPlatforms.map(platform => `./dist/${platform}/images/contractRSK`),

@@ -18,18 +18,10 @@ function mapStateToProps (state) {
 const defaultTokens = []
 
 const contractsETH = require('@metamask/contract-metadata')
-const contractsPOA = require('poa-contract-metadata')
 const contractsRSK = require('@rsksmart/rsk-contract-metadata')
 const contractsRSKTest = require('@rsksmart/rsk-testnet-contract-metadata')
 for (const address in contractsETH) {
   const contract = contractsETH[address]
-  if (contract.erc20) {
-    contract.address = address
-    defaultTokens.push(contract)
-  }
-}
-for (const address in contractsPOA) {
-  const contract = contractsPOA[address]
   if (contract.erc20) {
     contract.address = address
     defaultTokens.push(contract)
