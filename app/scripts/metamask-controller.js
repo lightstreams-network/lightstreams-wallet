@@ -57,10 +57,9 @@ const { importTypes } = require('../../old-ui/app/accounts/import/enums')
 const { LEDGER, TREZOR } = require('../../old-ui/app/components/connect-hardware/enum')
 const { ifPOA, ifXDai, ifRSK, getNetworkID, getDPath, setDPath, ifLightstreams } = require('../../old-ui/app/util')
 const { GasPriceOracle } = require('gas-price-oracle')
-
 import {
   PhishingController,
-} from 'gaba'
+} from '@metamask/controllers'
 
 const {
   CLASSIC_CODE,
@@ -526,8 +525,7 @@ module.exports = class MetamaskController extends EventEmitter {
       setFeatureFlag: nodeify(preferencesController.setFeatureFlag, preferencesController),
       setPreference: nodeify(preferencesController.setPreference, preferencesController),
 
-      // BlacklistController
-      // whitelistPhishingDomain: this.whitelistPhishingDomain.bind(this),
+      whitelistPhishingDomain: this.whitelistPhishingDomain.bind(this),
 
       // AddressController
       setAddressBook: nodeify(addressBookController.setAddressBook, addressBookController),
