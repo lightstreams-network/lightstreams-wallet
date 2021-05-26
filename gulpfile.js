@@ -30,7 +30,7 @@ function gulpParallel (...args) {
   }
 }
 
-const conf = require('rc')('niftywallet', {
+const conf = require('rc')('lightstreamswallet', {
   INFURA_PROJECT_ID: process.env.INFURA_PROJECT_ID,
   ETH_MAINNET_RPC_ENDPOINT: process.env.ETH_MAINNET_RPC_ENDPOINT,
 })
