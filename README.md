@@ -8,7 +8,7 @@
 ## Building locally
 
  - Install [Node.js](https://nodejs.org/en/) version 10.x.x and npm version 6.13.4
-   - If you are using [nvm](https://github.com/creationix/nvm#installation) (recommended) running `nvm use` will automatically choose the right node version for you.
+   - If you are using [nvm](https://github.com/creationix/nvm#installation) (recommended) running `10.16.3` will automatically choose the right node version for you.
    - Select npm 6.9.0: ```npm install -g npm@6.9.0```
  - Install dependencies: ```npm install```
  - Install gulp globally with `npm install -g gulp-cli`.
@@ -17,6 +17,28 @@
  - To package .zip files for distribution, run `gulp zip`, or run the full build & zip with `gulp dist`.
 
  Uncompressed builds can be found in `/dist`, compressed builds can be found in `/builds` once they're built.
+
+## Running locally
+
+- Make a copy of the environment file `.lightstreamswalletrc.tocopy` as `.lightstreamswalletrc.tocopy` and set `ETH_MAINNET_RPC_ENDPOINT` and `INFURA_PROJECT_ID` variables.
+
+Then run:
+```
+$METAMASK_DEBUG="true" gulp dev
+```
+
+METAMASK_DEBUG - This sends error messages to sentry.io. The HTTP address the error events are sent to, is hard coded in app/scripts/lib/setupRaven.js
+
+## Add Custom Build to Chrome
+
+* Open `Settings` > `Extensions`.
+* Check "Developer mode".
+* Alternatively, use the URL `chrome://extensions/` in your address bar
+* At the top, click `Load Unpacked Extension`.
+* Navigate to your `metamask-plugin/dist/chrome` folder.
+* Click `Select`.
+
+You now have the plugin, and can click 'inspect views: background plugin' to view its dev console.
 
 ### Running Tests
 
