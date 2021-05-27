@@ -24,7 +24,7 @@
 
 Then run:
 ```
-$METAMASK_DEBUG="true" gulp dev
+$ METAMASK_DEBUG="true" gulp dev
 ```
 
 METAMASK_DEBUG - This sends error messages to sentry.io. The HTTP address the error events are sent to, is hard coded in app/scripts/lib/setupRaven.js
