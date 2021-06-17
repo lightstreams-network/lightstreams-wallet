@@ -190,7 +190,7 @@ async function loadStateFromPersistence () {
   } else {
     // throw in setTimeout so as to not block boot
     setTimeout(() => {
-      throw new Error('Lightstreams Wallet - Localstore not supported')
+      //throw new Error('Lightstreams Wallet - Localstore not supported')
     })
   }
 
