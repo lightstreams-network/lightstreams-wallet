@@ -200,6 +200,7 @@ const LIGHTSTREAMS_SIRIUS_OBJ = {
 networks[LIGHTSTREAMS_SIRIUS_CODE] = LIGHTSTREAMS_SIRIUS_OBJ
 networks[LIGHTSTREAMS_SIRIUS] = LIGHTSTREAMS_SIRIUS_OBJ
 
+/*
 const MAINNET_OBJ = {
   order: 3,
   chainType: PROD,
@@ -210,6 +211,7 @@ const MAINNET_OBJ = {
 }
 networks[MAINNET_CODE] = MAINNET_OBJ
 networks[MAINNET] = MAINNET_OBJ
+ */
 
 const getNetworkDisplayName = key => networks[key].displayName
 
