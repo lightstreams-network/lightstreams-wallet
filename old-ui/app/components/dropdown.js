@@ -43,7 +43,7 @@ class Dropdown extends Component {
 
     const styleDefaults = extend({
       borderRadius: '4px',
-      background: 'rgba(71, 28, 115, 0.95)',
+      background: 'rgba(10, 27, 148 , 0.95)',
       overflowY: 'auto',
       transition: 'max-height 300ms ease-in-out',
     }, style)
@@ -86,7 +86,7 @@ class DropdownMenuItem extends Component {
       padding: (this.props.style && this.props.style.padding) ? this.props.style.padding : '15px 0px',
       fontSize: '16px',
       fontStyle: 'normal',
-      fontFamily: 'Nunito Regular',
+      fontFamily: 'Montserrat UltraLight',
       cursor: 'pointer',
       display: 'flex',
       justifyContent: 'flex-start',

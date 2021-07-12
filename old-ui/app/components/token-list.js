@@ -18,18 +18,10 @@ function mapStateToProps (state) {
 const defaultTokens = []
 
 const contractsETH = require('@metamask/contract-metadata')
-const contractsPOA = require('poa-contract-metadata')
 const contractsRSK = require('@rsksmart/rsk-contract-metadata')
 const contractsRSKTest = require('@rsksmart/rsk-testnet-contract-metadata')
 for (const address in contractsETH) {
   const contract = contractsETH[address]
-  if (contract.erc20) {
-    contract.address = address
-    defaultTokens.push(contract)
-  }
-}
-for (const address in contractsPOA) {
-  const contract = contractsPOA[address]
   if (contract.erc20) {
     contract.address = address
     defaultTokens.push(contract)
@@ -81,7 +73,7 @@ TokenList.prototype.render = function () {
       'We had trouble loading your token balances. You can view them ',
       h('span.hotFix', {
         style: {
-          color: '#60db97',
+          color: '#d97c7c',
           cursor: 'pointer',
         },
         onClick: () => {
@@ -156,7 +148,7 @@ TokenList.prototype.renderTokenStatusBar = function () {
   } else if (tokensFromCurrentNetwork.length > 1) {
     msg = `You own ${tokensFromCurrentNetwork.length} tokens`
   } else {
-    msg = `No tokens found`
+    msg = `Coming soon... \nNFTs etc.`
     noTokens = true
   }
 
@@ -171,19 +163,15 @@ TokenList.prototype.renderTokenStatusBar = function () {
       },
     }, [
       h('span', msg),
-      h('button.btn-primary.wallet-view__add-token-button', {
+      h('button.btn-primary--disabled.wallet-view__add-token-button', {
         key: 'reveal-account-bar',
-        onClick: (event) => {
-          event.preventDefault()
-          this.props.addToken()
-        },
         style: {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
         },
       }, [
-        'Add Token',
+        'Add',
       ]),
     ]),
     noTokens ? h('div', {

@@ -1,9 +1,8 @@
 import { isValidAddress } from 'ethereumjs-util'
 import contractMapETH from '@metamask/contract-metadata'
-import contractMapPOA from 'poa-contract-metadata'
 import contractMapRSK from '@rsksmart/rsk-contract-metadata'
 import contractMapRSKTest from '@rsksmart/rsk-testnet-contract-metadata'
-import { MAINNET_CODE, POA_CODE, RSK_CODE, RSK_TESTNET_CODE } from '../../app/scripts/controllers/network/enums'
+import { MAINNET_CODE, RSK_CODE, RSK_TESTNET_CODE } from '../../app/scripts/controllers/network/enums'
 const colors = require('../../colors')
 const { toChecksumAddress, getTokenImageFolder } = require('../app/util')
 
@@ -78,14 +77,12 @@ function _getContractMap (networkID) {
   switch (networkID) {
     case MAINNET_CODE:
       return contractMapETH
-    case POA_CODE:
-      return contractMapPOA
     case RSK_CODE:
       return contractMapRSK
     case RSK_TESTNET_CODE:
       return contractMapRSKTest
     default:
-      return contractMapPOA
+      return contractMapETH
   }
 }
 

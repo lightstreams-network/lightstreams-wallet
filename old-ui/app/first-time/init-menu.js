@@ -47,43 +47,21 @@ InitializeMenuScreen.prototype.renderMenu = function (state) {
         animationEventEmitter: this.animationEventEmitter,
       }),*/
 
-      h('.logo'),
-
-      h('h1', {
+      h('.logo', {
         style: {
-          paddingTop: '50px',
-          fontSize: '1.3em',
-          color: '#ffffff',
-          marginBottom: 10,
+          marginBottom: '150px',
         },
-      }, 'Nifty Wallet'),
-
+      }),
 
       h('div', [
         h('h3', {
           style: {
-            fontSize: '0.8em',
-            color: '#ffffff',
+            fontSize: '18px',
+            fontWeight: '300',
+            color: '#fff',
             display: 'inline',
           },
-        }, 'Encrypt your new DEN'),
-
-        h(Tooltip, {
-          title: 'Your DEN is your password-encrypted storage within Nifty Wallet.',
-          id: 'initMenu',
-        },
-
-        h('i.fa.fa-question-circle.pointer', {
-          style: {
-            fontSize: '18px',
-            position: 'relative',
-            color: '#60db97',
-            top: '2px',
-            marginLeft: '4px',
-          },
-          'data-tip': '',
-          'data-for': 'initMenu',
-        })),
+        }, 'Create a password'),
       ]),
 
       state.warning ? h('div', {
@@ -132,10 +110,10 @@ InitializeMenuScreen.prototype.renderMenu = function (state) {
         h('p.pointer', {
           onClick: this.showRestoreVault.bind(this),
           style: {
-            fontSize: '0.8em',
-            color: '#60db97',
+            fontSize: '16px',
+            color: '#333',
           },
-        }, 'Import Existing DEN'),
+        }, 'Import a wallet'),
       ]),
 
     ])

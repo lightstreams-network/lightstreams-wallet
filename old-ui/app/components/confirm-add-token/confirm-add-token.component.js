@@ -108,7 +108,7 @@ export default class ConfirmAddToken extends Component {
           <div className="page-container__footer-container">
             <Button
               type="default"
-              className="btn-violet"
+              className="btn-grey"
               onClick={() => showAddTokenPage()}
             >
               { 'Back' /* this.context.t('back')*/ }

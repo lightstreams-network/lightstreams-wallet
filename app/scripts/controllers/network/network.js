@@ -20,6 +20,8 @@ import {
 } from './enums'
 
 const {
+  LIGHTSTREAMS,
+  LIGHTSTREAMS_SIRIUS,
   ROPSTEN,
   RINKEBY,
   KOVAN,
@@ -32,6 +34,8 @@ const {
   CLASSIC,
   RSK,
   RSK_TESTNET,
+  LIGHTSTREAMS_CODE,
+  LIGHTSTREAMS_SIRIUS_CODE,
   POA_CODE,
   DAI_CODE,
   POA_SOKOL_CODE,
@@ -51,9 +55,9 @@ let defaultProviderConfigType
 if (process.env.IN_TEST === 'true') {
   defaultProviderConfigType = LOCALHOST
 } else if (testMode) {
-  defaultProviderConfigType = POA_SOKOL
+  defaultProviderConfigType = LIGHTSTREAMS_SIRIUS
 } else {
-  defaultProviderConfigType = POA
+  defaultProviderConfigType = LIGHTSTREAMS
 }
 
 const defaultProviderConfig = {
@@ -243,7 +247,11 @@ module.exports = class NetworkController extends EventEmitter {
       })
     }
 
-    if (isPocket && this.dProviderStore.getState().dProvider) {
+    if (type === LIGHTSTREAMS) {
+      this._configureStandardProvider({ rpcUrl: 'https://node.mainnet.lightstreams.io', chainId, ticker, nickname })
+    } else if (type === LIGHTSTREAMS_SIRIUS) {
+      this._configureStandardProvider({rpcUrl: 'https://node.sirius.lightstreams.io', chainId, ticker, nickname})
+    } else if (isPocket && this.dProviderStore.getState().dProvider) {
       this._configurePocketProvider(opts)
     } else if (isInfura) {
         this._configureInfuraProvider(type, this._infuraProjectId)

@@ -1,7 +1,7 @@
 /* color */
 
 .color-green {
-  color: #60db97;
+  color: #d97c7c;
 }
 
 .color-forest {
@@ -225,7 +225,7 @@ hr.horizontal-line {
 .keyring-label {
   z-index: 1;
   font-size: 11px;
-  background: #60db97;
+  background: #d97c7c;
   color: white;
   border-radius: 3px;
   height: 20px;

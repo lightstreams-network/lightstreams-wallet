@@ -61,7 +61,7 @@
   width: 95px;
 }
 .hw-connect__btn.selected {
-  border: 2px solid #60DB97;
+  border: 2px solid #d97c7c;
   width: 149px;
 }
 .hw-connect__btn:first-child {
@@ -154,7 +154,7 @@
 .hw-connect__get-hw__link {
   font-size: 14px;
   text-align: center;
-  color: #60DB97;
+  color: #d97c7c;
   cursor: pointer;
 }
 .hw-connect__step-asset {
@@ -177,7 +177,7 @@ width: 100%;
   margin-bottom: 23px;
   align-self: flex-start;
   color: #5d5d5d;
-  font-family: Nunito Regular;
+  font-family: Montserrat UltraLight;
   font-size: 16px;
   line-height: 21px;
   font-weight: bold;
@@ -188,7 +188,7 @@ width: 100%;
   margin-bottom: 23px;
   align-self: flex-end;
   color: #5d5d5d;
-  font-family: Nunito Regular;
+  font-family: Montserrat UltraLight;
   font-size: 16px;
   line-height: 21px;
   font-weight: normal;
@@ -256,7 +256,7 @@ width: 100%;
   border: none;
   min-width: 46px;
   padding: 0px;
-  font-family: Nunito Regular;
+  font-family: Montserrat UltraLight;
   background: transparent;
 }
 .hw-forget-device-container {
@@ -266,7 +266,7 @@ width: 100%;
   padding: 22px;
 }
 .hw-forget-device-container a {
-  color: #60db97;
+  color: #d97c7c;
   font-size: 14px;
   cursor: pointer;
 }
@@ -306,6 +306,11 @@ width: 100%;
   width: 50%;
 }
 .new-account-connect-form__button.btn-primary--disabled {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
+.btn-primary--disabled.wallet-view__add-token-button {
   cursor: not-allowed;
   opacity: .5;
 }

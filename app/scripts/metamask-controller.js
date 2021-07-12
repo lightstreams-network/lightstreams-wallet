@@ -45,6 +45,7 @@ const version = require('../manifest.json').version
 import ethUtil, { BN } from 'ethereumjs-util'
 const GWEI_BN = new BN('1000000000')
 const GWEI_10_BN = new BN('10000000000')
+const GWEI_500_BN = new BN('500000000000')
 import percentile from 'percentile'
 import seedPhraseVerifier from './lib/seed-phrase-verifier'
 import log from 'loglevel'
@@ -54,7 +55,7 @@ import EthQuery from 'eth-query'
 import nanoid from 'nanoid'
 const { importTypes } = require('../../old-ui/app/accounts/import/enums')
 const { LEDGER, TREZOR } = require('../../old-ui/app/components/connect-hardware/enum')
-const { ifPOA, ifXDai, ifRSK, getNetworkID, getDPath, setDPath } = require('../../old-ui/app/util')
+const { ifPOA, ifXDai, ifRSK, getNetworkID, getDPath, setDPath, ifLightstreams } = require('../../old-ui/app/util')
 const { GasPriceOracle } = require('gas-price-oracle')
 import {
   PhishingController,
@@ -1568,7 +1569,7 @@ module.exports = class MetamaskController extends EventEmitter {
     const { hostname } = new URL(sender.url)
     // Check if new connection is blocked if phishing detection is on
     if (usePhishDetect && this.phishingController.test(hostname)) {
-      log.debug('Nifty Wallet - sending phishing warning for', hostname)
+      log.debug('Lightstreams Wallet - sending phishing warning for', hostname)
       this.sendPhishingWarning(connectionStream, hostname)
       return
     }
@@ -2004,6 +2005,12 @@ module.exports = class MetamaskController extends EventEmitter {
     const { recentBlocks } = recentBlocksController.store.getState()
     const isPOA = ifPOA(networkId)
     const isXDai = ifXDai(networkId)
+    const isLightstreams = ifLightstreams(networkId)
+
+    // Return 500 gwei if using a Lightstrams, Sirius
+    if (isLightstreams) {
+      return '0x' + GWEI_500_BN.toString(16)
+    }
 
     // Return 10 gwei if using a POA, Sokol
     if (isPOA) {

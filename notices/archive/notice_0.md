@@ -1,11 +1,11 @@
-Dear Nifty Wallet Users,
+Dear User,
 
-Nifty Wallet is beta software. 
+This version of the Lightstreams Wallet is beta software. Although we thoroughly test each release, there may be unexpected defects that affect the wallet's intended behaviour. 
 
-When you log in to Nifty Wallet, your current account's address is visible to every new site you visit. This can be used to look up your account balances of Ether and other tokens.
+By clicking "Accept", you confirm that you have carefully read and understood the Terms of Service and Privacy Policy (see links below) for using the Lightstreams Wallet. 
 
-For your privacy, for now, please sign out of Nifty Wallet when you're done using a site.
+If you do not agree with the Terms of Service or the Privacy Policy, please do not click accept and immediately uninstall this extension.
 
-## Related Links ##
+**[Terms of Service](https://github.com/lightstreams-network/lightstreams-wallet/wiki/Terms-of-Service)**
 
-**[Terms of Service](https://github.com/poanetwork/metamask-extension/wiki/Terms-of-Service)**
+**[Privacy Policy](https://github.com/lightstreams-network/lightstreams-wallet/wiki/Privacy-Policy)**

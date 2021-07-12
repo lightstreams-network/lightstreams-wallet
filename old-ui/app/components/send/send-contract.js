@@ -372,7 +372,7 @@ class SendTransactionScreen extends PersistentForm {
 				<button
 					disabled={!this.buttonEnabled()}
 					style={{ marginRight: '20px' }}
-					className="btn-violet"
+					className="btn-grey"
 					onClick={() => this.copyAbiEncoded()}
 				>Copy ABI encoded
 				</button>

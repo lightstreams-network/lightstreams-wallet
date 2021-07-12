@@ -1,4 +1,4 @@
-name: Nifty Wallet CI
+name: Lightstreams Wallet CI
 
 on:
   push:

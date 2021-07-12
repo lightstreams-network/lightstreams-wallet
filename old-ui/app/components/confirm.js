@@ -52,7 +52,7 @@ class ConfirmScreen extends Component {
 					marginRight: '30px',
 				}}
 			>
-				<button className="btn-violet"
+				<button className="btn-grey"
 					onClick={() => this.props.onNoClick()}>
 					No
 				</button>

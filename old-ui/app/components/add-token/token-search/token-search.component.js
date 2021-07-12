@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import contractMapETH from '@metamask/contract-metadata'
-import contractMapPOA from 'poa-contract-metadata'
 import contractMapRSK from '@rsksmart/rsk-contract-metadata'
 import contractMapRSKTest from '@rsksmart/rsk-testnet-contract-metadata'
 import Fuse from 'fuse.js'
@@ -118,14 +117,12 @@ export default class TokenSearch extends Component {
     switch (networkID) {
       case MAINNET_CODE:
         return contractMapETH
-      case POA_CODE:
-        return contractMapPOA
       case RSK_CODE:
         return contractMapRSK
       case RSK_TESTNET_CODE:
         return contractMapRSKTest
       default:
-        return contractMapPOA
+        return contractMapETH
     }
   }
 }

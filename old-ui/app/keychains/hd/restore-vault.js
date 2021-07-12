@@ -43,7 +43,7 @@ RestoreVaultScreen.prototype.render = function () {
       }, [
         h('h3.flex-center', {
           style: {
-            fontFamily: 'Nunito SemiBold',
+            fontFamily: 'Montserrat Light',
             background: '#ffffff',
             color: '#333333',
             width: '100%',
@@ -51,7 +51,7 @@ RestoreVaultScreen.prototype.render = function () {
             padding: 30,
           },
         }, [
-          h('.page-subtitle', 'Restore Vault'),
+          h('.page-subtitle', 'Recover Wallet'),
         ]),
 
         // wallet seed entry
@@ -59,11 +59,11 @@ RestoreVaultScreen.prototype.render = function () {
           style: {
             width: '100%',
             marginBottom: '20px',
-            fontFamily: 'Nunito SemiBold',
+            fontFamily: 'Montserrat Light',
           },
-        }, 'Wallet Seed'),
+        }, 'Secret Phrase'),
         h('textarea.twelve-word-phrase', {
-          placeholder: 'Enter your secret twelve word phrase here to restore your vault.',
+          placeholder: 'Enter your wallet secret phrase.',
         }),
 
         // password
@@ -118,7 +118,7 @@ RestoreVaultScreen.prototype.render = function () {
         }, [
 
           // cancel
-          h('button.btn-violet', {
+          h('button.btn-grey', {
             onClick: this.showInitializeMenu.bind(this),
           }, 'Cancel'),
 

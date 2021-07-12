@@ -30,7 +30,7 @@ function gulpParallel (...args) {
   }
 }
 
-const conf = require('rc')('niftywallet', {
+const conf = require('rc')('lightstreamswallet', {
   INFURA_PROJECT_ID: process.env.INFURA_PROJECT_ID,
   ETH_MAINNET_RPC_ENDPOINT: process.env.ETH_MAINNET_RPC_ENDPOINT,
 })
@@ -70,10 +70,6 @@ createCopyTasks('images', {
 createCopyTasks('contractImages', {
   source: './node_modules/@metamask/contract-metadata/images/',
   destinations: commonPlatforms.map(platform => `./dist/${platform}/images/contract`),
-})
-createCopyTasks('contractImagesPOA', {
-  source: './node_modules/poa-contract-metadata/images/',
-  destinations: commonPlatforms.map(platform => `./dist/${platform}/images/contractPOA`),
 })
 createCopyTasks('contractImagesRSK', {
   source: './node_modules/@rsksmart/rsk-contract-metadata/images/',

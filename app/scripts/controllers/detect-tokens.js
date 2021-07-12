@@ -1,6 +1,5 @@
 import Web3 from 'web3'
 import contractsETH from '@metamask/contract-metadata'
-import contractsPOA from 'poa-contract-metadata'
 import contractsRSK from '@rsksmart/rsk-contract-metadata'
 import contractsRSKTest from '@rsksmart/rsk-testnet-contract-metadata'
 import { warn } from 'loglevel'
@@ -61,7 +60,7 @@ class DetectTokensController {
           this._preferences.addToken(contractAddress, contracts[contractAddress].symbol, contracts[contractAddress].decimals, this.network)
         }
       } else {
-        warn(`Nifty Wallet - DetectTokensController balance fetch failed for ${contractAddress}.`, error)
+        warn(`Lightstreams Wallet - DetectTokensController balance fetch failed for ${contractAddress}.`, error)
       }
     })
   }
@@ -72,11 +71,10 @@ class DetectTokensController {
   */
   getContracts () {
     const isMainnet = this._network.store.getState().provider.type === MAINNET
-    const isPOA = this._network.store.getState().provider.type === POA
     const isRSK = this._network.store.getState().provider.type === RSK
     const isRSKTestnet = this._network.store.getState().provider.type === RSK_TESTNET
     // todo: isDAI
-    const contracts = isMainnet ? contractsETH : isPOA ? contractsPOA : isRSK ? contractsRSK : isRSKTestnet ? contractsRSKTest : {}
+    const contracts = isMainnet ? contractsETH : isRSK ? contractsRSK : isRSKTestnet ? contractsRSKTest : {}
     return contracts
   }
 

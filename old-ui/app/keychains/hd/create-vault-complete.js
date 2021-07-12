@@ -32,17 +32,18 @@ class CreateVaultCompleteScreen extends Component {
             padding: '30px 6px 6px 6px',
           },
         }, [
-          'Vault Created',
+          'Secret Phrase',
         ]),
 
         h('div', {
           style: {
-            fontSize: '1em',
-            margin: '10px 30px',
-            textAlign: 'center',
+            fontSize: '14px',
+            margin: '15px 30px',
+            textAlign: 'left',
           },
         }, [
-          h('div.error', `These ${wordsCount} words are the only way to restore your Nifty Wallet accounts.\nSave them somewhere safe and secret.`),
+          h('p',
+            `Please record the following secret phrase and keep it safe.`),
         ]),
 
         h('textarea.twelve-word-phrase', {
@@ -51,22 +52,32 @@ class CreateVaultCompleteScreen extends Component {
         }),
 
         h('button', {
-          onClick: () => this.confirmSeedWords()
-            .then(account => this.showAccountDetail(account)),
-          style: {
-            margin: '24px',
-            fontSize: '0.9em',
-            marginBottom: '10px',
-          },
-        }, 'I\'ve copied it somewhere safe'),
-
-        h('button', {
-          onClick: () => exportAsFile(`Nifty Wallet Seed Words`, seed),
+          onClick: () => exportAsFile(`secret_phrase`, seed),
           style: {
             margin: '10px',
             fontSize: '0.9em',
           },
-        }, 'Save Seed Words As File'),
+        }, 'Save As File'),
+
+        h('div', {
+          style: {
+            fontSize: '14px',
+            margin: '10px 30px',
+            textAlign: 'left',
+          },
+        }, [
+          h('div.error',
+            `If you forget your password then this phrase is the only way to recover your wallet. Do not reveal it to anyone as it can be used to take control of your wallet and steal your funds.`),
+        ]),
+
+        h('button', {
+          onClick: () => this.confirmSeedWords()
+            .then(account => this.showAccountDetail(account)),
+          style: {
+            margin: '5px 20px',
+            fontSize: '0.9em',
+          },
+        }, 'I confirm that I\'ve recorded the phrase'),
       ])
     )
   }

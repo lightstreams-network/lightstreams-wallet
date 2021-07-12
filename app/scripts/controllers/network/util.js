@@ -1,4 +1,14 @@
 const {
+  LIGHTSTREAMS,
+  LIGHTSTREAMS_CODE,
+  LIGHTSTREAMS_DISPLAY_NAME,
+  LIGHTSTREAMS_CHAINID,
+  DROPDOWN_LIGHTSTREAMS_DISPLAY_NAME,
+  LIGHTSTREAMS_SIRIUS,
+  LIGHTSTREAMS_SIRIUS_CODE,
+  LIGHTSTREAMS_SIRIUS_CHAINID,
+  LIGHTSTREAMS_SIRIUS_DISPLAY_NAME,
+  DROPDOWN_LIGHTSTREAMS_SIRIUS_DISPLAY_NAME,
   POA,
   DAI,
   POA_SOKOL,
@@ -48,7 +58,7 @@ const {
 
 const { TEST, PROD } = chainTypes
 const networks = {}
-
+/*
 const POA_OBJ = {
   order: 1,
   chainType: PROD,
@@ -166,6 +176,42 @@ const RSK_TESTNET_OBJ = {
 }
 networks[RSK_TESTNET_CODE] = RSK_TESTNET_OBJ
 networks[RSK_TESTNET] = RSK_TESTNET_OBJ
+*/
+
+const LIGHTSTREAMS_OBJ = {
+  order: 0,
+  chainType: PROD,
+  providerName: LIGHTSTREAMS,
+  networkID: LIGHTSTREAMS_CODE,
+  displayName: LIGHTSTREAMS_DISPLAY_NAME,
+  displayNameDropdown: 'Lightstreams',
+}
+networks[LIGHTSTREAMS_CODE] = LIGHTSTREAMS_OBJ
+networks[LIGHTSTREAMS] = LIGHTSTREAMS_OBJ
+
+const LIGHTSTREAMS_SIRIUS_OBJ = {
+  order: 1,
+  chainType: PROD,
+  providerName: LIGHTSTREAMS_SIRIUS,
+  networkID: LIGHTSTREAMS_SIRIUS_CODE,
+  displayName: LIGHTSTREAMS_SIRIUS_DISPLAY_NAME,
+  displayNameDropdown: 'Sirius Testnet',
+}
+networks[LIGHTSTREAMS_SIRIUS_CODE] = LIGHTSTREAMS_SIRIUS_OBJ
+networks[LIGHTSTREAMS_SIRIUS] = LIGHTSTREAMS_SIRIUS_OBJ
+
+/*
+const MAINNET_OBJ = {
+  order: 3,
+  chainType: PROD,
+  providerName: MAINNET,
+  networkID: MAINNET_CODE,
+  displayName: MAINNET_DISPLAY_NAME,
+  displayNameDropdown: DROPDOWN_MAINNET_DISPLAY_NAME,
+}
+networks[MAINNET_CODE] = MAINNET_OBJ
+networks[MAINNET] = MAINNET_OBJ
+ */
 
 const getNetworkDisplayName = key => networks[key].displayName
 

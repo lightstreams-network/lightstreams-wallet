@@ -40,7 +40,7 @@ RevealSeedConfirmation.prototype.render = function () {
           fontFamily: 'Nunito  Semibold',
         },
       }, [
-        h('.page-subtitle', 'Reveal Seed Words'),
+        h('.page-subtitle', 'Reveal Secret Phrase'),
       ]),
 
       h('div', {
@@ -52,13 +52,11 @@ RevealSeedConfirmation.prototype.render = function () {
         },
       }, [
 
-        h('.error', 'Do not recover your seed words in a public place! These words can be used to steal all your accounts.'),
-
         // confirmation
         h('input.large-input', {
           type: 'password',
           id: 'password-box',
-          placeholder: 'Enter your password to confirm',
+          placeholder: 'Enter your password',
           onKeyPress: this.checkConfirmation.bind(this),
           style: {
             marginTop: '20px',
@@ -84,7 +82,7 @@ RevealSeedConfirmation.prototype.render = function () {
           },
         }, [
           // cancel
-          h('button.btn-violet', {
+          h('button.btn-grey', {
             onClick: this.goHome.bind(this),
           }, 'Cancel'),
 

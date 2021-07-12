@@ -115,7 +115,7 @@ class ConfigScreen extends Component {
 
             h('div', { style: {display: 'flex'} }, [
               h('input#new_rpc', {
-                placeholder: 'New RPC URL',
+                placeholder: 'New RPC',
                 style: {
                   width: 'inherit',
                   flex: '1 0 auto',
@@ -146,13 +146,9 @@ class ConfigScreen extends Component {
 
             h('hr.horizontal-line'),
 
-            this.currentConversionInformation(metamaskState),
-
-            h('hr.horizontal-line'),
-
             h('div', [
               h('p.config-title', `State logs`),
-              h('p.config-description', `State logs contain your public account addresses and sent transactions.`),
+              h('p.config-description', `State logs contain your account information and transactions.`),
               h('button.btn-spread', {
                 style: {
                   alignSelf: 'center',
@@ -162,18 +158,18 @@ class ConfigScreen extends Component {
                     if (err) {
                       props.displayWarning('Error in retrieving state logs.')
                     } else {
-                      exportAsFile('Nifty Wallet State Logs.json', result)
+                      exportAsFile('State Logs.json', result)
                     }
                   })
                 },
-              }, 'Download State Logs'),
+              }, 'Download'),
             ]),
 
             h('hr.horizontal-line'),
 
             h('div', [
-              h('p.config-title', `Seed words`),
-              h('p.config-description', `Reveal seed words.`),
+              h('p.config-title', `Secret Phrase`),
+              h('p.config-description', `If you forget your wallet password, this phrase is the only way to recover your wallet.`),
               h('button.btn-spread', {
                 style: {
                   alignSelf: 'center',
@@ -182,7 +178,7 @@ class ConfigScreen extends Component {
                   event.preventDefault()
                   props.revealSeedConfirmation()
                 },
-              }, 'Reveal Seed Words'),
+              }, 'Reveal'),
             ]),
 
             h('hr.horizontal-line', {
@@ -191,51 +187,8 @@ class ConfigScreen extends Component {
               },
             }),
 
-            h('p.config-title', `Provider`),
-
-            h('div', {
-              style: {
-                display: 'table',
-                width: '100%',
-              },
-            }, [
-              h('div', {
-                style: {
-                display: 'table-cell',
-              }}, [
-                h('p.config-description', 'Switch to Decentralized Provider (Pocket)'),
-              ]),
-              h('div', { style: {
-                display: 'table-cell',
-              }}, [
-                h('input', {
-                  type: 'checkbox',
-                  name: 'pocket-checkbox',
-                  checked: this.state.dProvider,
-                  onChange: (event) => {
-                    event.preventDefault()
-                    this.toggleProvider()
-                  },
-                }),
-              ]),
-            ]),
-
-            h('hr.horizontal-line'),
-
             h('div', [
               h('p.config-title', `Account`),
-              h('p.config-description', `Resetting is for developer use only.`),
-              h('button.btn-spread', {
-                style: {
-                  alignSelf: 'center',
-                },
-                onClick (event) {
-                  event.preventDefault()
-                  props.resetAccount()
-                },
-              }, 'Reset Account'),
-
-              h('p.config-description', 'Changing of password'),
 
               h('button.btn-spread', {
                 onClick (event) {
@@ -329,7 +282,7 @@ class ConfigScreen extends Component {
     let title, value
 
     if (networks[provider.type]) {
-      title = 'Current Network'
+      title = 'Network'
       value = ethNetProps.props.getNetworkDisplayName(networks[provider.type].networkID)
     } else {
       title = 'Current RPC'

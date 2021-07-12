@@ -22,7 +22,7 @@ Notice.prototype.render = function () {
     h('.flex-column.flex-center.flex-grow', {
       style: {
         width: '100%',
-        fontFamily: 'Nunito SemiBold',
+        fontFamily: 'Montserrat Light',
       },
     }, [
       h('style', `
@@ -51,7 +51,7 @@ Notice.prototype.render = function () {
         }
 
         .markdown a {
-          color: #60db97;
+          color: #d97c7c;
         }
 
         .markdown::-webkit-scrollbar {
@@ -91,8 +91,8 @@ Notice.prototype.render = function () {
             }
           },
           style: {
-            background: '#542289',
-            color: '#ffffff',
+            background: '#ffffff',
+            color: '#495f75',
             height: '430px',
             width: '90%',
             overflowY: 'scroll',

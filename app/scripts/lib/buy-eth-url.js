@@ -6,6 +6,8 @@ module.exports = {
 const ethNetProps = require('eth-net-props')
 
 const {
+  LIGHTSTREAMS_CODE,
+  LIGHTSTREAMS_SIRIUS_CODE,
   POA_CODE,
   DAI_CODE,
   POA_SOKOL_CODE,
@@ -34,12 +36,14 @@ function getBuyEthUrl ({ network, amount, address, ind }) {
   let url
   switch (Number(network)) {
     case MAINNET_CODE:
+    case LIGHTSTREAMS_CODE:
     case POA_CODE:
     case DAI_CODE:
     case CLASSIC_CODE:
     case RSK_CODE:
       url = getExchanges({network, amount, address})[ind].link
       break
+    case LIGHTSTREAMS_SIRIUS_CODE:
     case ROPSTEN_CODE:
     case RINKEBY_CODE:
     case KOVAN_CODE:
@@ -77,7 +81,18 @@ function getExchanges ({network, amount, address}) {
     case 1:
       return [
         {
-          link: `https://buy.coinbase.com/?code=9ec56d01-7e81-5017-930c-513daa27bb6a&amount=${amount}&address=${address}&crypto_currency=ETH`,
+          link: `https://buy.coinbase.com/?amount=${amount}&address=${address}&crypto_currency=ETH`,
+        },
+        {
+          name: 'Coindeal',
+          link: `https://frontend.coindeal.com/deposit/btc.html?crypto=ETH`,
+        },
+      ]
+    case LIGHTSTREAMS_CODE:
+      return [
+        {
+          name: 'Coindeal',
+          link: `https://frontend.coindeal.com/market/PHT-ETH/`,
         },
       ]
     case CLASSIC_CODE:

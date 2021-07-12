@@ -80,7 +80,7 @@ ExportAccountView.prototype.render = function () {
             },
           },
             [
-              h('button.btn-violet', {
+              h('button.btn-grey', {
                 onClick: () => this.props.dispatch(actions.backToAccountDetail(this.props.address)),
               }, 'Cancel'),
               h('button', {
@@ -113,7 +113,7 @@ ExportAccountView.prototype.render = function () {
       h('label', {
         style: {
           textAlign: 'center',
-          fontFamily: 'Nunito Semibold',
+          fontFamily: 'Montserrat Light',
         },
       }, 'Your private key'),
       h('div.flex-row', [
@@ -144,8 +144,8 @@ ExportAccountView.prototype.render = function () {
           marginTop: '30px',
         },
       }, [
-        h('button.btn-violet', {
-          onClick: () => exportAsFile(`Nifty Wallet ${nickname} Private Key`, plainKey),
+        h('button.btn-grey', {
+          onClick: () => exportAsFile(`Lightstreams Wallet ${nickname} Private Key`, plainKey),
         }, 'Save as File'),
         h('button', {
           style: {

@@ -2,9 +2,9 @@ const assert = require('assert')
 const { screens } = require('../elements')
 
 const login = async (f, password) => {
-  it('title is \'Nifty Wallet\'', async () => {
+  it('title is \'Lightstreams Wallet\'', async () => {
     const title = await f.driver.getTitle()
-    assert.equal(title, 'Nifty Wallet', 'title is incorrect')
+    assert.equal(title, 'Lightstreams Wallet', 'title is incorrect')
   })
 
   it('screen \'Terms of Use\' has not empty agreement', async () => {
