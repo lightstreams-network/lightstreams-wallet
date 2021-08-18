@@ -35,6 +35,20 @@
     "default_title": "Lightstreams Wallet",
     "default_popup": "popup.html"
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
   "permissions": [
     "clipboardWrite",
     "http://localhost:8545/",

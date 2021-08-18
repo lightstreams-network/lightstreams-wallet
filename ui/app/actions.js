@@ -178,6 +178,8 @@ const actions = {
   TRANSACTION_ERROR: 'TRANSACTION_ERROR',
   NEXT_TX: 'NEXT_TX',
   EDIT_TX: 'EDIT_TX',
+  connectMsg: connectMsg,
+  approveMsg: approveMsg,
   signMsg: signMsg,
   cancelMsg: cancelMsg,
   signPersonalMsg,
@@ -944,6 +946,41 @@ function setCurrentCurrency (currencyCode) {
           conversionRate: data.conversionRate,
           conversionDate: data.conversionDate,
         },
+      })
+    })
+  }
+}
+
+function connectMsg (msgData) {
+  log.debug('action - connectMsg')
+  return (dispatch) => {
+    dispatch(actions.showLoadingIndication())
+    dispatch(actions.completedTx(msgData.metamaskId))
+    dispatch(closeCurrentNotificationWindow())
+  }
+}
+
+function approveMsg (msgData) {
+  log.debug('action - approveMsg')
+  return (dispatch) => {
+    dispatch(actions.showLoadingIndication())
+    return new Promise((resolve, reject) => {
+      log.debug(`actions calling background.approveMessage`)
+      background.approveMessage(msgData, (err, newState) => {
+        log.debug('approveMessage called back')
+        dispatch(actions.updateMetamaskState(newState))
+        dispatch(actions.hideLoadingIndication())
+
+        if (err) {
+          log.error(err)
+          dispatch(actions.displayWarning(err.message))
+          return reject(err)
+        }
+
+        dispatch(actions.completedTx(msgData.metamaskId))
+        dispatch(closeCurrentNotificationWindow())
+
+        return resolve(msgData)
       })
     })
   }

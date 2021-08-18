@@ -1,5 +1,12 @@
 module.exports = {
   'confirm sig requests': {
+    approveMessage: (msgData, cb) => {
+      const stateUpdate = {
+        unapprovedMsgs: {},
+        unapprovedMsgCount: 0,
+      }
+      return cb(null, stateUpdate)
+    },
     signMessage: (msgData, cb) => {
       const stateUpdate = {
         unapprovedMsgs: {},

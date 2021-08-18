@@ -341,7 +341,7 @@ module.exports = class MetamaskController extends EventEmitter {
       },
       version,
       // account mgmt
-      getAccounts: async () => {
+      getAccounts1: async () => {
         const selectedAddress = this.preferencesController.getSelectedAddress()
         // only show address if account is unlocked
         if (this.isUnlocked && selectedAddress) {
@@ -349,6 +349,7 @@ module.exports = class MetamaskController extends EventEmitter {
         }
         return [] // changing this is a breaking change
       },
+      getAccounts: this.getAccounts.bind(this),
       // tx signing
       processTransaction: this.newUnapprovedTransaction.bind(this),
       // msg signing
@@ -550,6 +551,7 @@ module.exports = class MetamaskController extends EventEmitter {
       estimateGas: nodeify(this.estimateGas, this),
 
       // messageManager
+      approveMessage: nodeify(this.approveMessage, this),
       signMessage: nodeify(this.signMessage, this),
       cancelMessage: this.cancelMessage.bind(this),
 
@@ -1167,6 +1169,34 @@ module.exports = class MetamaskController extends EventEmitter {
     return await this.txController.newUnapprovedTransaction(txParams, req)
   }
 
+  // eth_accounts
+
+  getAccounts (req) {
+    log.info('MetaMaskController - getAccounts')
+    const selectedAddress = this.preferencesController.getSelectedAddress()
+    if (this.isConnected() && this.isUnlocked() && selectedAddress) {
+      return [selectedAddress]
+    }
+
+    let msgParams = {
+      data: '0x0'
+    }
+
+    this.sendUpdate()
+    this.opts.showUnconfirmedMessage()
+    return this.messageManager.addUnapprovedConnectMessageAsync(msgParams, req)
+      .then(() => {
+        this.keyringController.setConnected()
+      })
+      .then(() => {
+        // only show address if account is unlocked
+        if (this.isUnlocked() && selectedAddress) {
+          return [selectedAddress]
+        }
+        return [] // changing this is a breaking change
+      })
+  }
+
   // eth_sign methods:
 
   /**
@@ -1183,6 +1213,21 @@ module.exports = class MetamaskController extends EventEmitter {
     this.sendUpdate()
     this.opts.showUnconfirmedMessage()
     return promise
+  }
+
+  approveMessage (msgParams) {
+    log.info('MetaMaskController - approveMessage')
+    const msgId = msgParams.metamaskId
+
+    // sets the status op the message to 'approved'
+    // and removes the metamaskId for signing
+    return this.messageManager.approveMessage(msgParams)
+      .then((rawSig) => {
+        // tells the listener that the message has been signed
+        // and can be returned to the dapp
+        this.messageManager.setMsgStatusSigned(msgId, rawSig)
+        return this.getState()
+      })
   }
 
   /**
@@ -1565,6 +1610,8 @@ module.exports = class MetamaskController extends EventEmitter {
    * @param {MessageSender} sender - The sender of the messages on this stream
    */
   setupUntrustedCommunication (connectionStream, sender) {
+    this.keyringController.disconnect()
+
     const { usePhishDetect } = this.preferencesController.store.getState()
     const { hostname } = new URL(sender.url)
     // Check if new connection is blocked if phishing detection is on
@@ -1951,6 +1998,10 @@ module.exports = class MetamaskController extends EventEmitter {
    */
   isUnlocked () {
     return this.keyringController.memStore.getState().isUnlocked
+  }
+
+  isConnected () {
+    return this.keyringController.memStore.getState().isConnected
   }
 
   /**

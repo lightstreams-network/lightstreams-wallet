@@ -9,6 +9,7 @@ import log from 'loglevel'
 const { getCurrentKeyring, ifContractAcc } = require('./util')
 
 const PendingTx = require('./components/pending-tx')
+import ConnectMsg from './components/pending-connect-msg'
 import PendingMsg from './components/pending-msg'
 import PendingPersonalMsg from './components/pending-personal-msg'
 import PendingTypedMsg from './components/pending-typed-msg'
@@ -110,6 +111,7 @@ class ConfirmTxScreen extends Component {
           sendTransaction: this.sendTransaction.bind(this),
           cancelTransaction: this.cancelTransaction.bind(this, txData),
           cancelAllTransactions: this.cancelAllTransactions.bind(this, unconfTxList),
+          approveMessage: this.approveMessage.bind(this, txData),
           signMessage: this.signMessage.bind(this, txData),
           signPersonalMessage: this.signPersonalMessage.bind(this, txData),
           signTypedMessage: this.signTypedMessage.bind(this, txData),
@@ -144,6 +146,14 @@ class ConfirmTxScreen extends Component {
     event.preventDefault()
     this.props.actions.cancelTxs(unconfTxList)
     this._checkIfMultipleContractExecutionAndUnlockContract(unconfTxList)
+  }
+
+  approveMessage (msgData, event) {
+    log.info('conf-tx.js: approving message')
+    const params = msgData.msgParams
+    params.metamaskId = msgData.id
+    this.stopPropagation(event)
+    this.props.actions.approveMsg(params)
   }
 
   signMessage (msgData, event) {
@@ -255,6 +265,9 @@ function currentTxView (opts) {
     } else if (type === 'eth_signTypedData') {
       log.debug('rendering eth_signTypedData message')
       return h(PendingTypedMsg, opts)
+    } else if (type === 'connect_app') {
+      log.debug('rendering connect_app message')
+      return h(ConnectMsg, opts)
     }
   }
 }
@@ -306,6 +319,8 @@ function mapDispatchToProps (dispatch) {
       updateAndApproveTx: (txData) => dispatch(actions.updateAndApproveTx(txData)),
       cancelTx: (txData) => dispatch(actions.cancelTx(txData)),
       cancelTxs: (unconfTxList) => dispatch(actions.cancelTxs(unconfTxList)),
+      connectMsg: (params) => dispatch(actions.connectMsg(params)),
+      approveMsg: (params) => dispatch(actions.approveMsg(params)),
       signMsg: (params) => dispatch(actions.signMsg(params)),
       signPersonalMsg: (params) => dispatch(actions.signPersonalMsg(params)),
       signTypedMsg: (params) => dispatch(actions.signTypedMsg(params)),

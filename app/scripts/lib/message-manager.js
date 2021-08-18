@@ -104,6 +104,33 @@ export default class MessageManager extends EventEmitter {
     })
   }
 
+  addUnapprovedConnectMessageAsync (msgParams, req) {
+    return new Promise((resolve, reject) => {
+      const msgId = this.addUnapprovedConnectMessage(msgParams, req)
+      // await finished
+      this.once(`${msgId}:finished`, (data) => {
+        switch (data.status) {
+          case 'signed':
+            return resolve(data.rawSig)
+          case 'rejected':
+            return reject(
+              ethErrors.provider.userRejectedRequest(
+                'Lightstreams Wallet: User denied connecting application.',
+              ),
+            )
+          default:
+            return reject(
+              new Error(
+                `Lightstreams Wallet: Unknown problem: ${JSON.stringify(
+                  msgParams,
+                )}`,
+              ),
+            )
+        }
+      })
+    })
+  }
+
   /**
    * Creates a new Message with an 'unapproved' status using the passed msgParams. this.addMsg is called to add the
    * new Message to this.messages, and to save the unapproved Messages from that list to this.memStore.
@@ -128,6 +155,29 @@ export default class MessageManager extends EventEmitter {
       time,
       status: 'unapproved',
       type: MESSAGE_TYPE.ETH_SIGN,
+    }
+    this.addMsg(msgData)
+
+    // signal update
+    this.emit('update')
+    return msgId
+  }
+
+  addUnapprovedConnectMessage (msgParams, req) {
+    // add origin from request
+    if (req) {
+      msgParams.origin = req.origin
+    }
+    msgParams.data = normalizeMsgData(msgParams.data)
+    // create txData obj with parameters and meta data
+    const time = new Date().getTime()
+    const msgId = createId()
+    const msgData = {
+      id: msgId,
+      msgParams,
+      time,
+      status: 'unapproved',
+      type: MESSAGE_TYPE.CONNECT_APP,
     }
     this.addMsg(msgData)
 
