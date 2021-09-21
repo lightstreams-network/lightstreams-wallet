@@ -26,6 +26,9 @@
   flex-direction: row;
   display: flex;
 }
+.hw-connect__btn-wrapper:not(:first-of-type) {
+  margin-top: 15px;
+}
 .hw-connect__connect-btn {
   color: #fff;
   border: none;
@@ -49,8 +52,8 @@
 .hw-connect__btn {
   background: #fbfbfb;
   border: 1px solid #e5e5e5;
-  height: 100px;
-  width: 150px;
+  height: 75px;
+  width: 50px;
   flex: 1;
   display: flex;
   align-items: center;
@@ -58,14 +61,17 @@
   border-radius: 5px;
 }
 .hw-connect__btn__img {
-  width: 95px;
+  width: 65px;
 }
 .hw-connect__btn.selected {
   border: 2px solid #60DB97;
   width: 149px;
 }
-.hw-connect__btn:first-child {
+.hw-connect__btn:not(:last-of-type) {
   margin-right: 15px;
+}
+.hw-connect__btn:first-child {
+
 }
 .hw-connect__btn:last-child {
 
