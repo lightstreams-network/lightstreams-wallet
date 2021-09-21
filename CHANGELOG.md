@@ -2,6 +2,8 @@
 
 ## Current Master
 
+## 5.2.6 Tue Sep 21 2021
+
 - [#466](https://github.com/poanetwork/nifty-wallet/pull/466) - Update NPM dependencies to match Node v14.x
 - [#403](https://github.com/poanetwork/nifty-wallet/pull/403), [#467](https://github.com/poanetwork/nifty-wallet/pull/467) - Add D'CENT hardware wallet support
 
