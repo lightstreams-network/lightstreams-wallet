@@ -66,8 +66,6 @@ class ConnectScreen extends Component {
                 <div className="hw-connect__btn-wrapper">
                     {this.renderConnectToLedgerButton()}
                     {this.renderConnectToTrezorButton()}
-                </div>
-                <div className="hw-connect__btn-wrapper">
                     {this.renderConnectToDcentButton()}
                 </div>
                 <button
