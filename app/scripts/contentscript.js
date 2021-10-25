@@ -17,9 +17,9 @@ const inpageContent = fs.readFileSync(
 const inpageSuffix = `//# sourceURL=${extension.runtime.getURL('inpage.js')}\n`
 const inpageBundle = inpageContent + inpageSuffix
 
-const CONTENT_SCRIPT = 'nifty-contentscript'
-const INPAGE = 'nifty-inpage'
-const PROVIDER = 'metamask-provider'
+const CONTENT_SCRIPT = 'lightstreams-contentscript'
+const INPAGE = 'lightstreams-inpage'
+const PROVIDER = 'lightstreams-provider'
 
 // TODO:LegacyProvider: Delete
 const LEGACY_CONTENT_SCRIPT = 'contentscript'

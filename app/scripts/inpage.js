@@ -46,16 +46,16 @@ log.setDefaultLevel(process.env.METAMASK_DEBUG ? 'debug' : 'warn')
 //
 
 // setup background connection
-const metamaskStream = new LocalMessageDuplexStream({
-  name: 'nifty-inpage',
-  target: 'nifty-contentscript',
+const stream = new LocalMessageDuplexStream({
+  name: 'lightstreams-inpage',
+  target: 'lightstreams-contentscript',
 })
 
 // compose the inpage provider
-const inpageProvider = new MetaMaskInpageProvider(metamaskStream)
+const inpageProvider = new MetaMaskInpageProvider(stream, {jsonRpcStreamName: 'lightstreams-provider'})
 
 //
 // end deprecate:Q1-2020
 //
 
-window.ethereum = inpageProvider
+window.lightstreams = inpageProvider

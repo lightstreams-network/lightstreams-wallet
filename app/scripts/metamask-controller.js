@@ -341,14 +341,6 @@ module.exports = class MetamaskController extends EventEmitter {
       },
       version,
       // account mgmt
-      getAccounts1: async () => {
-        const selectedAddress = this.preferencesController.getSelectedAddress()
-        // only show address if account is unlocked
-        if (this.isUnlocked && selectedAddress) {
-          return [selectedAddress]
-        }
-        return [] // changing this is a breaking change
-      },
       getAccounts: this.getAccounts.bind(this),
       // tx signing
       processTransaction: this.newUnapprovedTransaction.bind(this),
@@ -1625,7 +1617,7 @@ module.exports = class MetamaskController extends EventEmitter {
     const mux = setupMultiplex(connectionStream)
 
     // messages between inpage and background
-    this.setupProviderConnection(mux.createStream('metamask-provider'), sender)
+    this.setupProviderConnection(mux.createStream('lightstreams-provider'), sender)
     this.setupPublicConfig(mux.createStream('publicConfig'))
   }
 

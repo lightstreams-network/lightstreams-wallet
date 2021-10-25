@@ -440,9 +440,12 @@ class PendingTx extends Component {
               margin: '14px 30px',
             },
           }, [
-
             // Accept Button or Buy Button
-            insufficientBalance ? h('button.btn-green', { onClick: props.buyEth }, `Buy ${this.state.coinName}`) :
+            h('button.cancel.btn-red', {
+              onClick: props.cancelTransaction,
+              style: { marginLeft: '10px' },
+            }, 'Cancel'),
+            insufficientBalance ? h('button.btn-green', { onClick: props.buyEth }, `Send ${this.state.coinName}`) :
               h('input.confirm', {
                 type: 'submit',
                 value: 'Submit',
@@ -450,9 +453,6 @@ class PendingTx extends Component {
                 disabled: buyDisabled,
               }),
 
-            h('button.cancel.btn-red', {
-              onClick: props.cancelTransaction,
-            }, 'Cancel'),
           ]),
           showNavigation ? h('.flex-row.flex-space-around.conf-buttons', {
             style: {
