@@ -1,6 +1,6 @@
 {
-  "name": "metamask-crx",
-  "version": "0.0.0",
+  "name": "lightstreams-crx",
+  "version": "0.0.5",
   "public": false,
   "private": true,
   "scripts": {
