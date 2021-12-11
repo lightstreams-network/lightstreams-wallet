@@ -96,6 +96,8 @@ module.exports = class MetamaskController extends EventEmitter {
     // Do not modify directly. Use the associated methods.
     this.connections = {}
 
+    this.isConnected = false
+
     // lock to ensure only one vault created at once
     this.createVaultMutex = new Mutex()
 
@@ -1164,9 +1166,10 @@ module.exports = class MetamaskController extends EventEmitter {
   // eth_accounts
 
   getAccounts (req) {
+
     log.info('MetaMaskController - getAccounts')
     const selectedAddress = this.preferencesController.getSelectedAddress()
-    if (this.isConnected() && this.isUnlocked() && selectedAddress) {
+    if (this.isConnected && this.isUnlocked() && selectedAddress) {
       return [selectedAddress]
     }
 
@@ -1178,9 +1181,7 @@ module.exports = class MetamaskController extends EventEmitter {
     this.opts.showUnconfirmedMessage()
     return this.messageManager.addUnapprovedConnectMessageAsync(msgParams, req)
       .then(() => {
-        this.keyringController.setConnected()
-      })
-      .then(() => {
+        this.isConnected = true;
         // only show address if account is unlocked
         if (this.isUnlocked() && selectedAddress) {
           return [selectedAddress]
@@ -1602,7 +1603,7 @@ module.exports = class MetamaskController extends EventEmitter {
    * @param {MessageSender} sender - The sender of the messages on this stream
    */
   setupUntrustedCommunication (connectionStream, sender) {
-    this.keyringController.disconnect()
+    this.isConnected = false
 
     const { usePhishDetect } = this.preferencesController.store.getState()
     const { hostname } = new URL(sender.url)
@@ -1990,10 +1991,6 @@ module.exports = class MetamaskController extends EventEmitter {
    */
   isUnlocked () {
     return this.keyringController.memStore.getState().isUnlocked
-  }
-
-  isConnected () {
-    return this.keyringController.memStore.getState().isConnected
   }
 
   /**
