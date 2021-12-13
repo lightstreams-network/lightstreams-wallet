@@ -160,6 +160,8 @@ class PendingTx extends Component {
       fontSize: '14px',
     }
 
+    const amountToSend = isToken ? hexToBn(tokensToSend) : hexToBn(txParams.value)
+    const isValue = amountToSend.gt(hexToBn('0x0'))
 
     const isError = txMeta.simulationFails || !isValidAddress || insufficientBalance || (dangerousGasLimit && !gasLimitSpecified)
     return (
@@ -252,23 +254,8 @@ class PendingTx extends Component {
                     style: {
                       fontFamily: 'Montserrat UltraLight',
                     },
-                  }, [
-                    isToken ? h(TokenBalance, {
-                      token: this.state.token,
-                      fontSize: '12px',
-                    }) : h(EthBalance, {
-                      fontSize: '12px',
-                      value: balance,
-                      conversionRate,
-                      currentCurrency,
-                      network,
-                      showFiat: false,
-                      style: {
-                        lineHeight: '7px',
-                      },
-                      inline: true,
-                    }),
-                  ]),
+                  },
+                  ),
                 ]),
               ]),
 
@@ -343,7 +330,7 @@ class PendingTx extends Component {
                     style: {
                       fontSize: '12px',
                     },
-                  }, 'Recipient address is invalid. Sending this transaction will result in a loss of ETH. ')
+                  }, 'Recipient address is invalid. Sending this transaction will result in a loss. ')
                 : null,
 
                 insufficientBalance ?
@@ -351,7 +338,32 @@ class PendingTx extends Component {
                     style: {
                       fontSize: '12px',
                     },
-                  }, 'Insufficient balance for transaction. ')
+                  }, ['Insufficient balance for transaction.',
+                    h('.flex-row', {
+                      style: {
+                        fontSize: '12px',
+                      },
+                    }, [
+                      h('', {style: {marginRight: '5px'}}, 'Balance: '),
+                      isToken ? h(TokenBalance, {
+                        token: this.state.token,
+                        fontSize: '12px',
+                        color: 'ff1345',
+                      }) : h(EthBalance, {
+                        color: 'ff1345',
+                        fontSize: '12px',
+                        value: balance,
+                        conversionRate,
+                        currentCurrency,
+                        network,
+                        showFiat: false,
+                        style: {
+                          lineHeight: '7px',
+                        },
+                        inline: true,
+                      }),
+                    ]),
+                ])
                 : null,
 
                 (dangerousGasLimit && !gasLimitSpecified) ?
@@ -366,6 +378,7 @@ class PendingTx extends Component {
               // Ether Value
               // Currently not customizable, but easily modified
               // in the way that gas and gasLimit currently are.
+              isValue > 0 ?
               h('.row', [
                 h('.cell.label', 'Amount'),
                 h(EthBalance, {
@@ -379,7 +392,7 @@ class PendingTx extends Component {
                   tokenSymbol: this.state.token.symbol,
                   showFiat: false,
                 }),
-              ]),
+              ]) : null,
 
               // Max Transaction Fee (calculated)
               h('.cell.row', [
@@ -445,14 +458,13 @@ class PendingTx extends Component {
               onClick: props.cancelTransaction,
               style: { marginLeft: '10px' },
             }, 'Cancel'),
-            insufficientBalance ? h('button.btn-green', { onClick: props.buyEth }, `Send ${this.state.coinName}`) :
+            !insufficientBalance ?
               h('input.confirm', {
                 type: 'submit',
                 value: 'Submit',
                 style: { marginLeft: '10px' },
                 disabled: buyDisabled,
-              }),
-
+              }) : null,
           ]),
           showNavigation ? h('.flex-row.flex-space-around.conf-buttons', {
             style: {
