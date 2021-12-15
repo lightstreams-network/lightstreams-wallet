@@ -262,6 +262,7 @@ const actions = {
   showRemoveTokenPage,
   SHOW_ADD_SUGGESTED_TOKEN_PAGE: 'SHOW_ADD_SUGGESTED_TOKEN_PAGE',
   showAddSuggestedTokenPage,
+  getSelectectAddress,
   addToken,
   addTokens,
   removeToken,
@@ -1870,6 +1871,17 @@ function addToken (address, symbol, decimals, image, network) {
       })
     })
   }
+}
+
+function getSelectectAddress () {
+  return new Promise((resolve, reject) => {
+    background.getSelectedAddress((err, address) => {
+      if (err) {
+        reject(err)
+      }
+      resolve(address)
+    })
+  })
 }
 
 function removeToken (address) {

@@ -115,7 +115,7 @@ class PreferencesController {
    * @param {Function} - end
    */
   async requestWatchAsset (req, res, next, end) {
-    if (req.method === 'metamask_watchAsset') {
+    if (req.method === 'wallet_watchAsset') {
       const { type, options } = req.params
       switch (type) {
         case 'ERC20':
@@ -300,6 +300,10 @@ class PreferencesController {
    */
   getSelectedAddress () {
     return this.store.getState().selectedAddress
+  }
+
+  getSelectedAddressPromise () {
+    return Promise.resolve(this.getSelectedAddress())
   }
 
   /**
