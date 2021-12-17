@@ -512,7 +512,7 @@ module.exports = class MetamaskController extends EventEmitter {
       // PreferencesController
       getSelectedAddress: nodeify(preferencesController.getSelectedAddressPromise, preferencesController),
       setSelectedAddress: nodeify(preferencesController.setSelectedAddress, preferencesController),
-      addToken: nodeify(preferencesController.addToken, preferencesController),
+      addToken: nodeify(this.addToken, this),
       removeToken: nodeify(preferencesController.removeToken, preferencesController),
       removeRpcUrl: nodeify(preferencesController.removeRpcUrl, preferencesController),
       removeSuggestedTokens: nodeify(preferencesController.removeSuggestedTokens, preferencesController),
@@ -1136,6 +1136,14 @@ module.exports = class MetamaskController extends EventEmitter {
     this.preferencesController.setAddresses(allAccounts)
     // set new account as selected
     await this.preferencesController.setSelectedAddress(accounts[0])
+  }
+
+  
+   addToken (rawAddress, symbol, decimals, image, network){
+    if (!network) {
+      network = this.networkController.getNetworkState()
+    }
+    return this.preferencesController.addToken(rawAddress, symbol, decimals, image, network)
   }
 
   /**

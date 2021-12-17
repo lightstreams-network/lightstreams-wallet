@@ -45,13 +45,17 @@ function forwardCarrat () {
 }
 
 AddSuggestedTokenScreen.prototype.render = function () {
-  const { warning, tokenBalance } = this.state
+  const { warning, tokenBalance, account } = this.state
   const { network, suggestedTokens, dispatch } = this.props
   const key = Object.keys(suggestedTokens)[0]
   const { address, symbol, decimals } = suggestedTokens[key]
-
   const props = this.props
-  const identity = props.identities[address] || { address: address }
+
+  const identitiesList = Object.keys(props.identities)
+  let identity = props.identities[identitiesList[0]]
+  if (account) {
+    identity = props.identities[account]
+  }
 
   return (
     h('div', {
@@ -80,9 +84,41 @@ AddSuggestedTokenScreen.prototype.render = function () {
           ),
           forwardCarrat(),
           h(MiniAccountPanel, {
-            imageSeed: address,
+            imageSeed: identity.address,
             picOrder: 'left',
-          },
+          },[
+              h('div', {
+                style: {
+                  marginLeft: '10px',
+                },
+              }, [
+                h('div.font-pre-medium', {
+                  style: {
+                    fontFamily: 'Montserrat Light',
+                    color: '#ffffff',
+                    whiteSpace: 'nowrap',
+                  },
+                }, accountSummary(identity.name, 6, 4)),
+
+                h(Copyable, {
+                  value: toChecksumAddress(network, identity.address),
+                }, [
+                  h('span.font-small', {
+                    style: {
+                      fontFamily: 'Montserrat UltraLight',
+                      color: 'rgba(255, 255, 255, 0.7)',
+                    },
+                  }, addressSummary(network, identity.address, 6, 4, false)),
+                ]),
+
+                h('span.font-small', {
+                    style: {
+                      fontFamily: 'Montserrat UltraLight',
+                    },
+                  },
+                ),
+              ]),
+            ]
           ),
         ]),
 
@@ -134,7 +170,7 @@ AddSuggestedTokenScreen.prototype.render = function () {
               value: toChecksumAddress(props.network, address),
             }, [
               h('span', {},
-                addressSummary(props.network, address, 8, 8, false)),
+                addressSummary(props.network, address, 8, 8, true)),
             ]),
           ]),
 
@@ -231,11 +267,14 @@ AddSuggestedTokenScreen.prototype.validateInputs = function (opts) {
   return isValid
 }
 
-AddSuggestedTokenScreen.prototype.componentDidMount = function () {
+AddSuggestedTokenScreen.prototype.componentDidMount = async function () {
+  const account = await actions.getSelectectAddress()
+  this.setState({ account })
+
   this.createFreshTokenTracker()
 }
 
-AddSuggestedTokenScreen.prototype.createFreshTokenTracker = async function () {
+AddSuggestedTokenScreen.prototype.createFreshTokenTracker = function () {
   if (this.tracker) {
     // Clean up old trackers when refreshing:
     this.tracker.stop()
@@ -248,18 +287,17 @@ AddSuggestedTokenScreen.prototype.createFreshTokenTracker = async function () {
   const { suggestedTokens } = this.props
   const key = Object.keys(suggestedTokens)[0]
   const { address, symbol, decimals } = suggestedTokens[key]
-
-  let userAddress = await actions.getSelectectAddress()
+  const { account } = this.state
 
   this.tracker = new TokenTracker({
-    userAddress,
+    userAddress: account,
     provider: global.ethereumProvider,
     tokens: [
       {
         address,
-        symbol,
         decimals,
         network: null,
+        symbol,
       },
     ],
     pollingInterval: 5000,
@@ -277,6 +315,10 @@ AddSuggestedTokenScreen.prototype.createFreshTokenTracker = async function () {
   this.tracker.updateBalances()
     .then(() => {
       this.updateBalances(this.tracker.serialize())
+
+      this.tracker.stop()
+      this.tracker.removeListener('update', this.balanceUpdater)
+      this.tracker.removeListener('error', this.showError)
     })
     .catch((reason) => {
       log.error(`Problem updating balances`, reason)
@@ -292,11 +334,4 @@ AddSuggestedTokenScreen.prototype.updateBalances = function (tokens) {
   const tokenBalanceRaw = Number.parseFloat(token.string)
   const tokenBalance = tokenBalanceRaw.toFixed(countSignificantDecimals(tokenBalanceRaw, 2))
   this.setState({ tokenBalance, tokens, isLoading: false })
-}
-
-AddSuggestedTokenScreen.prototype.componentWillUnmount = function () {
-  if (!this.tracker) return
-  this.tracker.stop()
-  this.tracker.removeListener('update', this.balanceUpdater)
-  this.tracker.removeListener('error', this.showError)
 }
