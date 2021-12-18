@@ -435,6 +435,16 @@ class PendingTx extends Component {
                 ]),
               ]),
 
+              // Data size row:
+              h('.cell.row', {
+                style: {
+                  background: '#ffffff',
+                  paddingBottom: '0px',
+                },
+              }, [
+                h('.cell.label'),
+                h('.cell.value', `Data included: ${dataLength} bytes`),
+              ]),
             ]), // End of Table
 
           ]),

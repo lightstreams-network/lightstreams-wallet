@@ -70,18 +70,7 @@ TokenList.prototype.render = function () {
         padding: '30px',
       },
     }, [
-      'We had trouble loading your token balances. You can view them ',
-      h('span.hotFix', {
-        style: {
-          color: '#d97c7c',
-          cursor: 'pointer',
-        },
-        onClick: () => {
-          global.platform.openWindow({
-          url: `https://ethplorer.io/address/${userAddress}`,
-        })
-        },
-      }, 'here'),
+      'We had trouble loading your token balances.',
     ])
   }
 
@@ -141,14 +130,8 @@ TokenList.prototype.renderTokenStatusBar = function () {
   const { network } = this.props
   const tokensFromCurrentNetwork = tokens.filter(token => (parseInt(token.network) === parseInt(network) || !token.network))
 
-  let msg
   let noTokens = false
-  if (tokensFromCurrentNetwork.length === 1) {
-    msg = `You own 1 token`
-  } else if (tokensFromCurrentNetwork.length > 1) {
-    msg = `You own ${tokensFromCurrentNetwork.length} tokens`
-  } else {
-    msg = `Coming soon... \nNFTs etc.`
+  if (tokensFromCurrentNetwork.length === 0) {
     noTokens = true
   }
 
@@ -162,9 +145,12 @@ TokenList.prototype.renderTokenStatusBar = function () {
         padding: '30px 30px 10px',
       },
     }, [
-      h('span', msg),
-      h('button.btn-primary--disabled.wallet-view__add-token-button', {
+      h('button.btn-primary.wallet-view__add-token-button', {
         key: 'reveal-account-bar',
+        onClick: (event) => {
+          event.preventDefault()
+          this.props.addToken()
+        },
         style: {
           display: 'flex',
           justifyContent: 'center',
