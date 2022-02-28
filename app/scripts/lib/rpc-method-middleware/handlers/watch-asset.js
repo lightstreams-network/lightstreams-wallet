@@ -32,7 +32,9 @@ async function watchAssetHandler (
   { handleWatchAssetRequest },
 ) {
   try {
-    res.result = await handleWatchAssetRequest(req)
+    res.result = {
+    ...(await handleWatchAssetRequest(req)),
+    }
     return end()
   } catch (error) {
     return end(error)

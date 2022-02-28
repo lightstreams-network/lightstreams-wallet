@@ -121,17 +121,14 @@ class PreferencesController {
         case 'ERC20':
           const result = await this._handleWatchAssetERC20(options)
           if (result instanceof Error) {
-            end(result)
+            end({result})
           } else {
-            res.result = result
-            end()
+            return {result}
           }
           break
         default:
           end(new Error(`Asset of type ${type} not supported`))
       }
-    } else {
-      next()
     }
   }
 

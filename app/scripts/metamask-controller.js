@@ -4,7 +4,7 @@ import Dnode from 'dnode'
 import { ObservableStore } from '@metamask/obs-store'
 const ComposableObservableStore = require('./lib/ComposableObservableStore')
 import { storeAsStream } from '@metamask/obs-store/dist/asStream'
-import { JsonRpcEngine } from 'json-rpc-engine'
+import { JsonRpcEngine, createAsyncMiddleware } from 'json-rpc-engine'
 import { debounce } from 'lodash'
 import createEngineStream from 'json-rpc-middleware-stream/engineStream'
 import createFilterMiddleware from 'eth-json-rpc-filters'
@@ -21,6 +21,7 @@ import createMethodMiddleware from './lib/rpc-method-middleware'
 import { TRANSACTION_STATUSES } from '../../shared/constants/transaction'
 const NetworkController = require('./controllers/network')
 const PreferencesController = require('./controllers/preferences')
+const LSAuthTokenController = require('./controllers/ls-auth-token')
 const CurrencyController = require('./controllers/currency')
 const NoticeController = require('./notice-controller')
 const ShapeShiftController = require('./controllers/shapeshift')
@@ -113,6 +114,9 @@ module.exports = class MetamaskController extends EventEmitter {
       openPopup: opts.openPopup,
       network: this.networkController,
     })
+
+    // lsAuthToken controller
+    this.lsAuthTokenController = new LSAuthTokenController()
 
     // currency controller
     this.currencyController = new CurrencyController({
@@ -1138,7 +1142,7 @@ module.exports = class MetamaskController extends EventEmitter {
     await this.preferencesController.setSelectedAddress(accounts[0])
   }
 
-  
+
    addToken (rawAddress, symbol, decimals, image, network){
     if (!network) {
       network = this.networkController.getNetworkState()
@@ -1188,6 +1192,8 @@ module.exports = class MetamaskController extends EventEmitter {
 
     this.sendUpdate()
     this.opts.showUnconfirmedMessage()
+
+    // Request approval to connect DApp to wallet
     return this.messageManager.addUnapprovedConnectMessageAsync(msgParams, req)
       .then(() => {
         this.isConnected = true;
@@ -1770,6 +1776,7 @@ module.exports = class MetamaskController extends EventEmitter {
     }
     // logging
     engine.push(createLoggerMiddleware({ origin }))
+
     engine.push(
       createMethodMiddleware({
         origin,
@@ -1777,15 +1784,24 @@ module.exports = class MetamaskController extends EventEmitter {
         handleWatchAssetRequest: this.preferencesController.requestWatchAsset.bind(
           this.preferencesController,
         ),
+          handleLSTokenAuthRequest: this.lsAuthTokenController.requestLSTokenAuth.bind(
+          this.lsAuthTokenController,
+        ),
       }),
     )
+
+    /*
+    engine.push(createAsyncMiddleware(async (req, res, next) => {
+      await this.lsAuthTokenController.requestLSTokenAuth(req, res, next)
+    }))*/
+
     // filter and subscription polyfills
     engine.push(filterMiddleware)
     engine.push(subscriptionManager.middleware)
     // permissions
     // engine.push(this.permissionsController.createMiddleware({ origin, extensionId }))
     // watch asset
-    engine.push(this.preferencesController.requestWatchAsset.bind(this.preferencesController))
+    // engine.push(this.preferencesController.requestWatchAsset.bind(this.preferencesController))
     // forward to metamask primary provider
     engine.push(providerAsMiddleware(provider))
     return engine
