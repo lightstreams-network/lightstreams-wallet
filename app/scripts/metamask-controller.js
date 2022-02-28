@@ -413,9 +413,11 @@ module.exports = class MetamaskController extends EventEmitter {
     */
    async getProviderState (origin) {
      return {
+       isConnected: this.isConnected,
        isUnlocked: this.isUnlocked(),
        ...this.getProviderNetworkState(),
        accounts: await this.permissionsController.getAccounts(origin),
+       selectedAddress: this.preferencesController.getSelectedAddress()
      }
    }
 
@@ -1781,6 +1783,8 @@ module.exports = class MetamaskController extends EventEmitter {
       createMethodMiddleware({
         origin,
         getProviderState: this.getProviderState.bind(this),
+        keyringController: this.keyringController,
+        provider: this.provider,
         handleWatchAssetRequest: this.preferencesController.requestWatchAsset.bind(
           this.preferencesController,
         ),
