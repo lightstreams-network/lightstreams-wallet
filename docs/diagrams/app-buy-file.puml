@@ -1,0 +1,27 @@
+@startuml
+
+Title App Buy File
+
+actor User
+participant Wallet
+participant Dapp
+control Hub
+
+User -> Dapp: Buy File
+Dapp -> Wallet: BuyFile(peerId, meta)
+Wallet -> Wallet: CheckConnected()
+Wallet -> Wallet: GetFileDescription(meta)
+Wallet -> Wallet: GetPeerDescription(peerId)
+
+Wallet -> User: notify(meta, peer)
+
+note right of User: Approve purchase
+
+User -> Wallet: Approve()
+Wallet -> Wallet: SendPayment
+Wallet -> Wallet: GenerateAuthToken(peerId)
+Wallet -> Dapp: token
+Dapp -> Hub: GetFile(meta, token)
+
+
+@enduml

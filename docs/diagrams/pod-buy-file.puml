@@ -1,0 +1,26 @@
+@startuml
+
+Title Pod Buy File
+
+actor User
+participant Wallet
+participant Dapp
+control Pod
+
+User -> Dapp: Buy File
+Dapp -> Wallet: BuyFile(meta)
+Wallet -> Wallet: CheckLoggedIn(origin)
+Wallet -> Wallet: GetFileDescription(meta)
+
+Wallet -> User: notify(meta, peer)
+
+note right of User: Approve purchase
+
+User -> Wallet: Approve()
+Wallet -> Wallet: SendPayment
+Wallet -> Wallet: GenerateAuthToken(loggedIn)
+Wallet -> Dapp: token
+Dapp -> Pod: GetFile(meta, token)
+
+
+@enduml

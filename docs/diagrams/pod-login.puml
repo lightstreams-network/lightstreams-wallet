@@ -1,0 +1,36 @@
+@startuml
+
+Title Pod Login
+
+actor User
+participant Wallet
+participant Dapp
+control Pod
+
+Dapp -> Wallet: IsLoggedIn(peerId)
+
+alt pod not registered
+Wallet -> Wallet: Check(origin, peerId)
+Wallet --> Dapp: status: notRegistered
+
+else
+Wallet -> Wallet: loggedIn == peerId?
+Wallet --> Dapp: status: notLoggedIn
+end
+
+
+User -> Dapp: Login()
+Dapp -> Wallet: Login(peerId)
+Wallet -> Wallet: Check(origin, peerId)
+
+Wallet -> User: notify(origin)
+
+note right of User: Approve login \nof Dapp: origin
+
+User -> Wallet: Approve()
+Wallet -> Wallet: loggedIn = peerId
+
+Wallet --> Dapp: success
+User <-- Dapp: success
+
+@enduml

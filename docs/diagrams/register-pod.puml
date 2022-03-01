@@ -1,0 +1,27 @@
+@startuml
+
+Title Pod Registration
+
+actor User
+participant Wallet
+participant Dapp
+control Pod
+
+User -> Dapp: Register Pod
+Dapp -> Wallet: registerPod(peerId)
+Wallet -> User: notify(origin)
+
+note right of User: Warning. \nPod will access \nALL your files!
+
+User -> Wallet: Approve()
+Wallet -> Wallet: AddPod(peerId, origin)
+Wallet -> Wallet: AddConnected(origin)
+Wallet -> Wallet: GenerateAuthToken()
+Wallet -> Dapp: pubKey, token
+Dapp -> Pod: SetOwner(pubKey, token)
+Pod -> Pod: Verify(pubKey, token)
+Pod -> Pod: AddOwner(pubKey)
+Dapp <-- Pod: success
+User <-- Dapp: success
+
+@enduml

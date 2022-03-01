@@ -1,0 +1,18 @@
+@startuml
+
+Title Pod Get File
+
+actor User
+participant Wallet
+participant Dapp
+control Hub
+
+User -> Dapp: Get File
+Dapp -> Wallet: GetToken()
+Wallet -> Wallet: CheckLoggedIn(origin)
+Wallet -> Wallet: GenerateAuthToken(loggedIn)
+Wallet -> Dapp: token
+Dapp -> Hub: GetFile(meta, token)
+
+
+@enduml

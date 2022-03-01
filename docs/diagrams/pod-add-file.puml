@@ -1,0 +1,21 @@
+@startuml
+
+Title Pod Add File
+
+actor User
+participant Wallet
+participant Dapp
+control Pod
+
+User -> Dapp: Upload File
+Dapp -> Wallet: GetToken()
+Wallet -> Wallet: CheckLoggedIn(origin)
+Wallet -> Wallet: GenerateAuthToken(loggedIn)
+Wallet -> Dapp: token
+Dapp -> Pod: AddFile(file, acl, token)
+Pod -> Pod: Verify(owner, token)
+Pod -> Pod: AddFile(file)
+Dapp <-- Pod: success
+User <-- Dapp: success
+
+@enduml

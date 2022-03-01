@@ -1,0 +1,35 @@
+@startuml
+
+Title App Connect
+
+actor User
+participant Wallet
+participant Dapp
+control Pod
+
+Dapp -> Wallet: IsConnected()
+
+alt pod not registered
+Wallet -> Wallet: CheckConnected(origin)
+Wallet --> Dapp: status: false
+
+else
+Wallet --> Dapp: status: true
+end
+
+
+User -> Dapp: Connect()
+Dapp -> Wallet: Connect()
+Wallet -> Wallet: CheckConnected(origin)
+
+Wallet -> User: notify(origin)
+
+note right of User: Approve connect \nof Dapp: origin
+
+User -> Wallet: Approve()
+Wallet -> Wallet: AddConnected(origin)
+
+Wallet --> Dapp: success
+User <-- Dapp: success
+
+@enduml
