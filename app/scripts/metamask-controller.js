@@ -97,8 +97,6 @@ module.exports = class MetamaskController extends EventEmitter {
     // Do not modify directly. Use the associated methods.
     this.connections = {}
 
-    this.isConnected = false
-
     // lock to ensure only one vault created at once
     this.createVaultMutex = new Mutex()
 
@@ -412,12 +410,13 @@ module.exports = class MetamaskController extends EventEmitter {
     * }>} An object with relevant state properties.
     */
    async getProviderState (origin) {
+     let isConnected = this.preferencesController.isConnected(origin)
      return {
-       isConnected: this.isConnected,
+       isConnected,
        isUnlocked: this.isUnlocked(),
        ...this.getProviderNetworkState(),
        accounts: await this.permissionsController.getAccounts(origin),
-       selectedAddress: this.preferencesController.getSelectedAddress()
+       selectedAddress: this.preferencesController.getSelectedAddress(),
      }
    }
 
@@ -1181,29 +1180,31 @@ module.exports = class MetamaskController extends EventEmitter {
   // eth_accounts
 
   getAccounts (req) {
-
-    log.info('MetaMaskController - getAccounts')
+    let origin = ''
+    if (req.origin) {
+      origin = req.origin
+    }
     const selectedAddress = this.preferencesController.getSelectedAddress()
-    if (this.isConnected && this.isUnlocked() && selectedAddress) {
+    if (this.preferencesController.isConnected(origin) && this.isUnlocked() && selectedAddress) {
       return [selectedAddress]
     }
 
+    return []
+  }
+
+  requestConnect(origin) {
     let msgParams = {
-      data: '0x0'
+      data: '0x0',
     }
 
     this.sendUpdate()
     this.opts.showUnconfirmedMessage()
 
     // Request approval to connect DApp to wallet
-    return this.messageManager.addUnapprovedConnectMessageAsync(msgParams, req)
+    return this.messageManager.addUnapprovedConnectMessageAsync(msgParams, origin)
       .then(() => {
-        this.isConnected = true;
-        // only show address if account is unlocked
-        if (this.isUnlocked() && selectedAddress) {
-          return [selectedAddress]
-        }
-        return [] // changing this is a breaking change
+        const selectedAddress = this.preferencesController.connect(origin)
+        return [selectedAddress]
       })
   }
 
@@ -1226,7 +1227,6 @@ module.exports = class MetamaskController extends EventEmitter {
   }
 
   approveMessage (msgParams) {
-    log.info('MetaMaskController - approveMessage')
     const msgId = msgParams.metamaskId
 
     // sets the status op the message to 'approved'
@@ -1620,8 +1620,6 @@ module.exports = class MetamaskController extends EventEmitter {
    * @param {MessageSender} sender - The sender of the messages on this stream
    */
   setupUntrustedCommunication (connectionStream, sender) {
-    this.isConnected = false
-
     const { usePhishDetect } = this.preferencesController.store.getState()
     const { hostname } = new URL(sender.url)
     // Check if new connection is blocked if phishing detection is on
@@ -1653,7 +1651,7 @@ module.exports = class MetamaskController extends EventEmitter {
     const mux = setupMultiplex(connectionStream)
     // connect features
     this.setupControllerConnection(mux.createStream('controller'))
-    this.setupProviderConnection(mux.createStream('provider'), sender, true)
+    this.setupProviderConnection(mux.createStream('lightstreams-provider'), sender, true)
   }
 
   /**
@@ -1785,10 +1783,11 @@ module.exports = class MetamaskController extends EventEmitter {
         getProviderState: this.getProviderState.bind(this),
         keyringController: this.keyringController,
         provider: this.provider,
+        handleConnectRequest: this.requestConnect.bind(this),
         handleWatchAssetRequest: this.preferencesController.requestWatchAsset.bind(
           this.preferencesController,
         ),
-          handleLSTokenAuthRequest: this.lsAuthTokenController.requestLSTokenAuth.bind(
+        handleLSTokenAuthRequest: this.lsAuthTokenController.requestLSTokenAuth.bind(
           this.lsAuthTokenController,
         ),
       }),

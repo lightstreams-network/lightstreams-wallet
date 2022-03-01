@@ -2,23 +2,18 @@ const ethers = require("ethers")
 
 class LSAuthTokenController {
   constructor (opts = {}) {
-
   }
 
-  async requestLSTokenAuth (req, getProviderState, keyringController, provider) {
-    let stateProvider = await getProviderState()
-    if (!stateProvider.isUnlocked) { // || !stateProvider.isConnected) {
+  async requestLSTokenAuth (req, origin, getProviderState, keyringController, provider) {
+    let stateProvider = await getProviderState(origin)
+    if (!stateProvider.isUnlocked || !stateProvider.isConnected) {
       return {}
     }
 
     const { peerId } = req.params
 
-    if (req.method === 'wallet_lsAuthToken') {
-      let token = await this._handleLSTokenAuth(keyringController, stateProvider, provider, peerId)
-      return {token}
-    }
-
-    return {}
+    let token = await this._handleLSTokenAuth(keyringController, stateProvider, provider, peerId)
+    return {token}
   }
 
   async _handleLSTokenAuth (keyringController, stateProvider, web3, peerId) {

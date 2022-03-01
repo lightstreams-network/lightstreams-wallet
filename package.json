@@ -156,7 +156,7 @@
     "mkdirp": "^0.5.5",
     "multihashes": "^0.4.12",
     "nanoid": "^2.1.6",
-    "nifty-wallet-inpage-provider": "github:poanetwork/nifty-wallet-inpage-provider#3.0.0",
+    "lightstreams-wallet-inpage-provider": "github:lightstreams-network/lightstreams-inpage-provider",
     "nonce-tracker": "^1.0.0",
     "number-to-bn": "^1.7.0",
     "obj-multiplex": "^1.0.0",

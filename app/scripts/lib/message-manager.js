@@ -104,9 +104,9 @@ export default class MessageManager extends EventEmitter {
     })
   }
 
-  addUnapprovedConnectMessageAsync (msgParams, req) {
+  addUnapprovedConnectMessageAsync (msgParams, origin) {
     return new Promise((resolve, reject) => {
-      const msgId = this.addUnapprovedConnectMessage(msgParams, req)
+      const msgId = this.addUnapprovedConnectMessage(msgParams, origin)
       // await finished
       this.once(`${msgId}:finished`, (data) => {
         switch (data.status) {
@@ -163,11 +163,9 @@ export default class MessageManager extends EventEmitter {
     return msgId
   }
 
-  addUnapprovedConnectMessage (msgParams, req) {
+  addUnapprovedConnectMessage (msgParams, origin) {
     // add origin from request
-    if (req) {
-      msgParams.origin = req.origin
-    }
+    msgParams.origin = origin
     msgParams.data = normalizeMsgData(msgParams.data)
     // create txData obj with parameters and meta data
     const time = new Date().getTime()

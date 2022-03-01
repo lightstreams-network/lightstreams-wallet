@@ -18,11 +18,11 @@ async function lsAuthTokenHandler (
   res,
   _next,
   end,
-  { handleLSTokenAuthRequest, getProviderState, keyringController, provider },
+  { handleLSTokenAuthRequest, origin, getProviderState, keyringController, provider },
 ) {
   try {
     res.result = {
-      ...(await handleLSTokenAuthRequest(req, getProviderState, keyringController, provider)),
+      ...(await handleLSTokenAuthRequest(req, origin, getProviderState, keyringController, provider)),
     }
     return end()
   } catch (error) {

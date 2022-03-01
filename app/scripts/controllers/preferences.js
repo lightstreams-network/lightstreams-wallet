@@ -42,6 +42,7 @@ class PreferencesController {
       preferences: {
         useETHAsPrimaryCurrency: true,
       },
+      connectedApps: [],
     }, opts.initState)
 
     this.diagnostics = opts.diagnostics
@@ -615,6 +616,20 @@ class PreferencesController {
       throw new Error(`Invalid decimals ${decimals} must be at least 0, and not over 36`)
     }
     if (!isValidAddress(rawAddress)) throw new Error(`Invalid address ${rawAddress}`)
+  }
+
+  connect(origin) {
+    const connectedApps = this.store.getState().connectedApps
+    if (!connectedApps.includes(origin)) {
+      connectedApps.push(origin)
+    }
+    return this.getSelectedAddress()
+  }
+
+  isConnected(origin) {
+    const connectedApps = this.store.getState().connectedApps
+    let connected = connectedApps.includes(origin)
+    return connected
   }
 }
 

@@ -28,4 +28,5 @@ export const MESSAGE_TYPE = {
   WATCH_ASSET: 'wallet_watchAsset',
   WATCH_ASSET_LEGACY: 'metamask_watchAsset',
   LS_AUTH_TOKEN: 'wallet_lsAuthToken',
+  CONNECT: 'eth_accounts',
 }

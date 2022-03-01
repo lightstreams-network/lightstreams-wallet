@@ -32,7 +32,7 @@ cleanContextForImports()
 
 import log from 'loglevel'
 import LocalMessageDuplexStream from 'post-message-stream'
-import { MetaMaskInpageProvider } from 'nifty-wallet-inpage-provider'
+import { LightstreamsInpageProvider } from 'lightstreams-wallet-inpage-provider'
 
 // TODO:deprecate:Q1-2020
 import 'web3/dist/web3.min.js'
@@ -52,7 +52,7 @@ const stream = new LocalMessageDuplexStream({
 })
 
 // compose the inpage provider
-const inpageProvider = new MetaMaskInpageProvider(stream, {jsonRpcStreamName: 'lightstreams-provider'})
+const inpageProvider = new LightstreamsInpageProvider(stream, {jsonRpcStreamName: 'lightstreams-provider'})
 
 //
 // end deprecate:Q1-2020
