@@ -1,10 +1,10 @@
 import { MESSAGE_TYPE } from '../../../../../shared/constants/app'
 
-const lsAuthToken = {
+const connect = {
   methodNames: [MESSAGE_TYPE.CONNECT],
   implementation: connectHandler,
 }
-export default lsAuthToken
+export default connect
 
 async function connectHandler (
   req,

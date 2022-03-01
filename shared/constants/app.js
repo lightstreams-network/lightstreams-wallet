@@ -28,5 +28,6 @@ export const MESSAGE_TYPE = {
   WATCH_ASSET: 'wallet_watchAsset',
   WATCH_ASSET_LEGACY: 'metamask_watchAsset',
   LS_AUTH_TOKEN: 'wallet_lsAuthToken',
-  CONNECT: 'eth_accounts',
+  CONNECT: 'eth_accounts', // lightstreams-wallet-inpage-provider changes eth_requestAccounts to eth_accounts
+  IS_CONNECTED: 'wallet_is_connected',
 }

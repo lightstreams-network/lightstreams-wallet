@@ -532,7 +532,7 @@ module.exports = class MetamaskController extends EventEmitter {
       setAddressBook: nodeify(addressBookController.setAddressBook, addressBookController),
 
       // KeyringController
-      setLocked: nodeify(keyringController.setLocked, keyringController),
+      setLocked: nodeify(this.setLocked, this),
       createNewVaultAndKeychain: nodeify(this.createNewVaultAndKeychain, this),
       createNewVaultAndRestore: nodeify(this.createNewVaultAndRestore, this),
       addNewKeyring: nodeify(keyringController.addNewKeyring, keyringController),
@@ -1177,6 +1177,11 @@ module.exports = class MetamaskController extends EventEmitter {
     return await this.txController.newUnapprovedTransaction(txParams, req)
   }
 
+  async setLocked() {
+    await this.keyringController.setLocked()
+    this.preferencesController.clearConnected()
+  }
+
   // eth_accounts
 
   getAccounts (req) {
@@ -1784,6 +1789,7 @@ module.exports = class MetamaskController extends EventEmitter {
         keyringController: this.keyringController,
         provider: this.provider,
         handleConnectRequest: this.requestConnect.bind(this),
+        handleIsConnectedRequest: this.preferencesController.isConnectedRequest.bind(this.preferencesController),
         handleWatchAssetRequest: this.preferencesController.requestWatchAsset.bind(
           this.preferencesController,
         ),
@@ -1924,7 +1930,7 @@ module.exports = class MetamaskController extends EventEmitter {
 
     Object.values(this.connections).forEach((origin) => {
       Object.values(origin).forEach((conn) => {
-        if (conn.engine) {
+        if (conn.engine && this.preferencesController.isConnected(origin)) {
           conn.engine.emit('notification', getPayload(origin))
         }
       })

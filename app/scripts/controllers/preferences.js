@@ -623,6 +623,7 @@ class PreferencesController {
     if (!connectedApps.includes(origin)) {
       connectedApps.push(origin)
     }
+    this.store.updateState({ connectedApps })
     return this.getSelectedAddress()
   }
 
@@ -630,6 +631,21 @@ class PreferencesController {
     const connectedApps = this.store.getState().connectedApps
     let connected = connectedApps.includes(origin)
     return connected
+  }
+
+  isConnectedRequest(origin) {
+    let isConnected = this.isConnected(origin)
+    if (!isConnected){
+      return {isConnected}
+    }
+
+    let selectedAccount = this.getSelectedAddress()
+    return {isConnected, selectedAccount}
+  }
+
+  clearConnected() {
+    const connectedApps = []
+    this.store.updateState({ connectedApps })
   }
 }
 
