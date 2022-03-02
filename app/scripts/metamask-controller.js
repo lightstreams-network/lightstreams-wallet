@@ -986,7 +986,23 @@ module.exports = class MetamaskController extends EventEmitter {
     await this.messageManager.addUnapprovedLoginAsync(msgParams, origin)
     await this.preferencesController.setSelectedAddress(node.address)
     this.preferencesController.setLoggedIn(peerId)
+    this.preferencesController.connect(origin)
     return 'ok'
+  }
+
+  isLoggedIn(origin, req) {
+    const { peerId } = req.params
+
+    let node = this.preferencesController.findNode(peerId, origin)
+    if (!node) {
+      return 'not_registered'
+    }
+
+    const loggedIn = this.preferencesController.getLoggedIn()
+    if (loggedIn !== peerId) {
+      return 'no'
+    }
+    return 'yes'
   }
 
   //
@@ -1221,6 +1237,7 @@ module.exports = class MetamaskController extends EventEmitter {
   async setLocked() {
     await this.keyringController.setLocked()
     this.preferencesController.clearConnected()
+    this.preferencesController.clearLoggedIn()
   }
 
   // eth_accounts
@@ -1833,6 +1850,7 @@ module.exports = class MetamaskController extends EventEmitter {
         handleIsConnectedRequest: this.preferencesController.isConnectedRequest.bind(this.preferencesController),
         handleNodeRegisterRequest: this.registerNode.bind(this),
         handleNodeLoginRequest: this.login.bind(this),
+        handleIsLoggedInRequest: this.isLoggedIn.bind(this),
         handleWatchAssetRequest: this.preferencesController.requestWatchAsset.bind(
           this.preferencesController,
         ),

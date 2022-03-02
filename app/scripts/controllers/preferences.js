@@ -679,6 +679,15 @@ class PreferencesController {
     const loggedInNode = peerId
     this.store.updateState({ loggedInNode })
   }
+
+  getLoggedIn() {
+    return this.store.getState().loggedInNode
+  }
+
+  clearLoggedIn() {
+    const loggedInNode = ''
+    this.store.updateState({ loggedInNode })
+  }
 }
 
 module.exports = PreferencesController

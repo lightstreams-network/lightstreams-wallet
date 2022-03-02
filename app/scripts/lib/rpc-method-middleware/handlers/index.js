@@ -6,6 +6,7 @@ import connect from './connect'
 import isConnected from './is-connected'
 import nodeRegister from './node-register'
 import nodeLogin from './node-login'
+import isLoggedIn from './is-logged-in'
 
 const handlers = [
   getProviderState,
@@ -16,5 +17,6 @@ const handlers = [
   isConnected,
   nodeRegister,
   nodeLogin,
+  isLoggedIn,
 ]
 export default handlers
