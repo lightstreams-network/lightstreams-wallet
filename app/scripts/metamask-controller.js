@@ -948,6 +948,26 @@ module.exports = class MetamaskController extends EventEmitter {
 
 
   //
+  // Node Management
+  //
+
+  registerNode(origin, peerId) {
+    let msgParams = {
+      data: '0x0',
+    }
+
+    this.sendUpdate()
+    this.opts.showUnconfirmedMessage()
+    return this.messageManager.addUnapprovedRegisterNodeAsync(msgParams, origin)
+      .then(() => {
+        const selectedAddress = this.preferencesController.getSelectedAddress()
+        this.preferencesController.addNode(peerId, origin, selectedAddress)
+        this.preferencesController.connect(origin)
+        return selectedAddress
+      })
+  }
+
+  //
   // Account Management
   //
 
@@ -1143,8 +1163,7 @@ module.exports = class MetamaskController extends EventEmitter {
     await this.preferencesController.setSelectedAddress(accounts[0])
   }
 
-
-   addToken (rawAddress, symbol, decimals, image, network){
+  addToken (rawAddress, symbol, decimals, image, network){
     if (!network) {
       network = this.networkController.getNetworkState()
     }
@@ -1790,6 +1809,7 @@ module.exports = class MetamaskController extends EventEmitter {
         provider: this.provider,
         handleConnectRequest: this.requestConnect.bind(this),
         handleIsConnectedRequest: this.preferencesController.isConnectedRequest.bind(this.preferencesController),
+        handleNodeRegisterRequest: this.registerNode.bind(this),
         handleWatchAssetRequest: this.preferencesController.requestWatchAsset.bind(
           this.preferencesController,
         ),

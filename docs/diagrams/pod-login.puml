@@ -10,7 +10,7 @@ control Pod
 Dapp -> Wallet: IsLoggedIn(peerId)
 
 alt pod not registered
-Wallet -> Wallet: Check(origin, peerId)
+Wallet -> Wallet: CheckRegistered(origin, peerId)
 Wallet --> Dapp: status: notRegistered
 
 else
@@ -21,7 +21,7 @@ end
 
 User -> Dapp: Login()
 Dapp -> Wallet: Login(peerId)
-Wallet -> Wallet: Check(origin, peerId)
+Wallet -> Wallet: CheckRegistered(origin, peerId)
 
 Wallet -> User: notify(origin)
 

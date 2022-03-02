@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-export default class PendingMsg extends Component {
+export default class ConfirmRegisterNodeMsg extends Component {
   static propTypes = {
     txData: PropTypes.object,
     cancelMessage: PropTypes.func,
@@ -20,7 +20,7 @@ export default class PendingMsg extends Component {
             textAlign: 'center',
             color: 'white',
             margin: '10px',
-        }}>Connect Application</h3>
+        }}>Permit Access</h3>
     <div className="tx-data flex-column flex-justify-center flex-grow select-none" style={{
       margin: '0 10px',
     }}>
@@ -33,7 +33,7 @@ export default class PendingMsg extends Component {
         color: 'rgb(73, 95, 117)',
         background: 'white',
     }}>
-    <p>The following website would like connect and read your Lightstreams Wallet:</p>
+    <p>Allow access all your files:</p>
       <br/>
     <p style={{color: 'black', wordBreak: 'break-word'}}>{msgParams.origin}</p>
 

@@ -4,6 +4,7 @@ import ethUtil from 'ethereumjs-util'
 import { ethErrors } from 'eth-json-rpc-errors'
 import createId from './random-id'
 import { MESSAGE_TYPE } from './enums'
+import { MESSAGE_TYPE as APP_MESSAGE_TYPE } from '../../../shared/constants/app'
 
 /**
  * Represents, and contains data about, an 'eth_sign' type signature request. These are created when a signature for
@@ -176,6 +177,54 @@ export default class MessageManager extends EventEmitter {
       time,
       status: 'unapproved',
       type: MESSAGE_TYPE.CONNECT_APP,
+    }
+    this.addMsg(msgData)
+
+    // signal update
+    this.emit('update')
+    return msgId
+  }
+
+  addUnapprovedRegisterNodeAsync (msgParams, origin) {
+    return new Promise((resolve, reject) => {
+      const msgId = this.addUnapprovedRegisterNodeMessage(msgParams, origin)
+      // await finished
+      this.once(`${msgId}:finished`, (data) => {
+        switch (data.status) {
+          case 'signed':
+            return resolve(data.rawSig)
+          case 'rejected':
+            return reject(
+              ethErrors.provider.userRejectedRequest(
+                'Lightstreams Wallet: User denied registration of node.',
+              ),
+            )
+          default:
+            return reject(
+              new Error(
+                `Lightstreams Wallet: Unknown problem: ${JSON.stringify(
+                  msgParams,
+                )}`,
+              ),
+            )
+        }
+      })
+    })
+  }
+
+  addUnapprovedRegisterNodeMessage (msgParams, origin) {
+    // add origin from request
+    msgParams.origin = origin
+    msgParams.data = normalizeMsgData(msgParams.data)
+    // create txData obj with parameters and meta data
+    const time = new Date().getTime()
+    const msgId = createId()
+    const msgData = {
+      id: msgId,
+      msgParams,
+      time,
+      status: 'unapproved',
+      type: APP_MESSAGE_TYPE.NODE_REGISTER,
     }
     this.addMsg(msgData)
 

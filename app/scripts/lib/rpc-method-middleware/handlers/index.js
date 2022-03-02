@@ -4,6 +4,15 @@ import watchAsset from './watch-asset'
 import lsAuthToken from './ls-auth-token'
 import connect from './connect'
 import isConnected from './is-connected'
+import nodeRegister from './node-register'
 
-const handlers = [getProviderState, logWeb3ShimUsage, watchAsset, lsAuthToken, connect, isConnected]
+const handlers = [
+  getProviderState,
+  logWeb3ShimUsage,
+  watchAsset,
+  lsAuthToken,
+  connect,
+  isConnected,
+  nodeRegister,
+]
 export default handlers

@@ -43,6 +43,8 @@ class PreferencesController {
         useETHAsPrimaryCurrency: true,
       },
       connectedApps: [],
+      registeredNodes: [],
+      loggedInNode: null,
     }, opts.initState)
 
     this.diagnostics = opts.diagnostics
@@ -646,6 +648,36 @@ class PreferencesController {
   clearConnected() {
     const connectedApps = []
     this.store.updateState({ connectedApps })
+  }
+
+  addNode(peerId, origin, address) {
+    const registeredNodes = this.store.getState().registeredNodes
+
+    const existing = registeredNodes.find((node, index) => {
+      return (node.peerId === peerId && node.origin === origin)
+    })
+
+    if (!existing) {
+      registeredNodes.push({
+        peerId,
+        origin,
+        address,
+      })
+    }
+    this.store.updateState({ registeredNodes })
+  }
+
+  findNode(peerId, origin) {
+    const registeredNodes = this.store.getState().registeredNodes
+
+    return registeredNodes.find((node, index) => {
+      return (node.peerId === peerId && node.origin === origin)
+    })
+  }
+
+  setLoggedIn(peerId) {
+    const loggedInNode = peerId
+    this.store.updateState({ loggedInNode })
   }
 }
 

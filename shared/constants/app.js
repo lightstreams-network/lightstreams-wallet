@@ -30,4 +30,5 @@ export const MESSAGE_TYPE = {
   LS_AUTH_TOKEN: 'wallet_lsAuthToken',
   CONNECT: 'eth_accounts', // lightstreams-wallet-inpage-provider changes eth_requestAccounts to eth_accounts
   IS_CONNECTED: 'wallet_is_connected',
+  NODE_REGISTER: 'node_register',
 }
