@@ -11,6 +11,7 @@ const { getCurrentKeyring, ifContractAcc } = require('./util')
 const PendingTx = require('./components/pending-tx')
 import ConnectMsg from './components/pending-connect-msg'
 import ConfirmRegisterNodeMsg from './components/confirm-register-node-msg'
+import ConfirmLoginNodeMsg from './components/confirm-login-node-msg'
 import PendingMsg from './components/pending-msg'
 import PendingPersonalMsg from './components/pending-personal-msg'
 import PendingTypedMsg from './components/pending-typed-msg'
@@ -272,6 +273,9 @@ function currentTxView (opts) {
     } else if (type === 'node_register') {
       log.debug('rendering node_register message')
       return h(ConfirmRegisterNodeMsg, opts)
+    } else if (type === 'node_login') {
+      log.debug('rendering node_login message')
+      return h(ConfirmLoginNodeMsg, opts)
     }
   }
 }

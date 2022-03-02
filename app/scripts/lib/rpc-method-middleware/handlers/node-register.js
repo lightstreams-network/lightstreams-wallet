@@ -14,7 +14,7 @@ async function nodeRegisterHandler (
   { handleNodeRegisterRequest, origin },
 ) {
   try {
-    res.result = await handleNodeRegisterRequest(origin)
+    res.result = await handleNodeRegisterRequest(origin, req)
     return end()
   } catch (error) {
     return end(error)

@@ -951,7 +951,9 @@ module.exports = class MetamaskController extends EventEmitter {
   // Node Management
   //
 
-  registerNode(origin, peerId) {
+  registerNode(origin, req) {
+    const { peerId } = req.params
+
     let msgParams = {
       data: '0x0',
     }
@@ -965,6 +967,26 @@ module.exports = class MetamaskController extends EventEmitter {
         this.preferencesController.connect(origin)
         return selectedAddress
       })
+  }
+
+  async login(origin, req) {
+    const { peerId } = req.params
+
+    let msgParams = {
+      data: '0x0',
+    }
+
+    let node = this.preferencesController.findNode(peerId, origin)
+    if (!node) {
+      return 'not_registered'
+    }
+
+    this.sendUpdate()
+    await this.opts.showUnconfirmedMessage()
+    await this.messageManager.addUnapprovedLoginAsync(msgParams, origin)
+    await this.preferencesController.setSelectedAddress(node.address)
+    this.preferencesController.setLoggedIn(peerId)
+    return 'ok'
   }
 
   //
@@ -1810,6 +1832,7 @@ module.exports = class MetamaskController extends EventEmitter {
         handleConnectRequest: this.requestConnect.bind(this),
         handleIsConnectedRequest: this.preferencesController.isConnectedRequest.bind(this.preferencesController),
         handleNodeRegisterRequest: this.registerNode.bind(this),
+        handleNodeLoginRequest: this.login.bind(this),
         handleWatchAssetRequest: this.preferencesController.requestWatchAsset.bind(
           this.preferencesController,
         ),

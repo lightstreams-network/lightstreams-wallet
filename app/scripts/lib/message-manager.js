@@ -233,6 +233,55 @@ export default class MessageManager extends EventEmitter {
     return msgId
   }
 
+  addUnapprovedLoginAsync (msgParams, origin) {
+    return new Promise((resolve, reject) => {
+      const msgId = this.addUnapprovedLoginMessage(msgParams, origin)
+      // await finished
+      this.once(`${msgId}:finished`, (data) => {
+        switch (data.status) {
+          case 'signed':
+            return resolve(data.rawSig)
+          case 'rejected':
+            return reject(
+              ethErrors.provider.userRejectedRequest(
+                'Lightstreams Wallet: User denied registration of node.',
+              ),
+            )
+          default:
+            return reject(
+              new Error(
+                `Lightstreams Wallet: Unknown problem: ${JSON.stringify(
+                  msgParams,
+                )}`,
+              ),
+            )
+        }
+      })
+    })
+  }
+
+  addUnapprovedLoginMessage (msgParams, origin) {
+    // add origin from request
+    msgParams.origin = origin
+    msgParams.data = normalizeMsgData(msgParams.data)
+    // create txData obj with parameters and meta data
+    const time = new Date().getTime()
+    const msgId = createId()
+    const msgData = {
+      id: msgId,
+      msgParams,
+      time,
+      status: 'unapproved',
+      type: APP_MESSAGE_TYPE.NODE_LOGIN,
+    }
+    this.addMsg(msgData)
+
+    // signal update
+    this.emit('update')
+    return msgId
+  }
+
+
   /**
    * Adds a passed Message to this.messages, and calls this._saveMsgList() to save the unapproved Messages from that
    * list to this.memStore.
