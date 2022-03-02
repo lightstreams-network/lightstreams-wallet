@@ -4,13 +4,14 @@ class LSAuthTokenController {
   constructor (opts = {}) {
   }
 
-  async requestLSTokenAuth (req, origin, getProviderState, keyringController, provider) {
-    let stateProvider = await getProviderState(origin)
-    if (!stateProvider.isUnlocked || !stateProvider.isConnected) {
+  async requestNodeAuthToken (req, origin, getProviderState, keyringController, provider) {
+    const stateProvider = await getProviderState(origin)
+    const isLoggedIn = stateProvider.isLoggedIn(origin, req)
+    if (!stateProvider.isUnlocked || isLoggedIn !== 'yes') {
       return {}
     }
 
-    const { peerId } = req.params
+    const peerId = stateProvider.loggedIn
 
     let token = await this._handleLSTokenAuth(keyringController, stateProvider, provider, peerId)
     return {token}

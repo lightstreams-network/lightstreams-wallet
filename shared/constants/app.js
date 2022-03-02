@@ -27,10 +27,10 @@ export const MESSAGE_TYPE = {
   PERSONAL_SIGN: 'personal_sign',
   WATCH_ASSET: 'wallet_watchAsset',
   WATCH_ASSET_LEGACY: 'metamask_watchAsset',
-  LS_AUTH_TOKEN: 'wallet_lsAuthToken',
   CONNECT: 'eth_accounts', // lightstreams-wallet-inpage-provider changes eth_requestAccounts to eth_accounts
   IS_CONNECTED: 'wallet_isConnected',
   NODE_REGISTER: 'node_register',
   NODE_LOGIN: 'node_login',
   NODE_IS_LOGGEDIN: 'node_isLoggedIn',
+  NODE_AUTH_TOKEN: 'node_authToken',
 }

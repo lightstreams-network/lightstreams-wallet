@@ -410,9 +410,12 @@ module.exports = class MetamaskController extends EventEmitter {
     * }>} An object with relevant state properties.
     */
    async getProviderState (origin) {
-     let isConnected = this.preferencesController.isConnected(origin)
-     return {
+    let loggedIn = this.preferencesController.getLoggedIn()
+    let isConnected = this.preferencesController.isConnected(origin)
+    return {
        isConnected,
+       loggedIn,
+       isLoggedIn: this.isLoggedIn.bind(this),
        isUnlocked: this.isUnlocked(),
        ...this.getProviderNetworkState(),
        accounts: await this.permissionsController.getAccounts(origin),
@@ -1854,7 +1857,7 @@ module.exports = class MetamaskController extends EventEmitter {
         handleWatchAssetRequest: this.preferencesController.requestWatchAsset.bind(
           this.preferencesController,
         ),
-        handleLSTokenAuthRequest: this.lsAuthTokenController.requestLSTokenAuth.bind(
+        handleNodeAuthTokenRequest: this.lsAuthTokenController.requestNodeAuthToken.bind(
           this.lsAuthTokenController,
         ),
       }),
