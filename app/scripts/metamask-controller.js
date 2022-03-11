@@ -955,6 +955,10 @@ module.exports = class MetamaskController extends EventEmitter {
   //
 
   registerNode(origin, req) {
+    if (!this.isUnlocked()) {
+      return
+    }
+
     const { peerId } = req.params
 
     let msgParams = {
@@ -973,6 +977,10 @@ module.exports = class MetamaskController extends EventEmitter {
   }
 
   async login(origin, req) {
+    if (!this.isUnlocked()) {
+      return
+    }
+
     const { peerId } = req.params
 
     let msgParams = {
@@ -990,10 +998,14 @@ module.exports = class MetamaskController extends EventEmitter {
     await this.preferencesController.setSelectedAddress(node.address)
     this.preferencesController.setLoggedIn(peerId)
     this.preferencesController.connect(origin)
-    return 'ok'
+    return node.address
   }
 
   isLoggedIn(origin, req) {
+    if (!this.isUnlocked()) {
+      return
+    }
+
     const { peerId } = req.params
 
     let node = this.preferencesController.findNode(peerId, origin)
